@@ -26,7 +26,8 @@
                                      alt="{{ $pro->image_path }}"
                                 >
                                 <div class="card-body">
-                                    <a href=""><h6 class="card-title">{{ $pro->name }}</h6></a>
+                                    {{-- acceder a los detalles del producto atraves del nombre --}}
+                                    <a href="{{route('producto.show',['id'=>$pro->id])}}"><h6 class="card-title">{{ $pro->name }}</h6></a>
                                     <p>${{ $pro->price }}</p>
                                     <form action="{{ route('cart.store') }}" method="POST">
                                         {{ csrf_field() }}

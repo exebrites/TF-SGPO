@@ -53,7 +53,7 @@
                         <div class="col-lg-5">
                             <p>
                                 {{-- <b><a href="/shop/{{ $item->attributes->slug }}">{{ $item->name }}</a></b><br> --}}
-                                <b><a href="">{{ $item->name }}</a></b><br>
+                                <b><a href="{{route('producto.show',['id'=>$item->id])}}">{{ $item->name }}</a></b><br>
                                 <b>Price: </b>${{ $item->price }}<br>
                                 <b>Sub Total: </b>${{ \Cart::get($item->id)->getPriceSum() }}<br>
                                 {{--                                <b>With Discount: </b>${{ \Cart::get($item->id)->getPriceSumWithConditions() }}--}}
@@ -95,7 +95,7 @@
                         </ul>
                     </div>
                     <br><a href="/" class="btn btn-dark">Continue en la tienda</a>
-                    <a href="/checkout" class="btn btn-success">Proceder al Checkout</a>
+                    <a href="{{route('checkout.index')}}" class="btn btn-success">Proceder al Checkout</a>
                 </div>
             @endif
         </div>
