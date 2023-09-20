@@ -35,6 +35,7 @@ class CartController extends Controller
                 'slug' => $request->slug
             )
         ));
+      
         return redirect()->route('cart.index')->with('success_msg', 'Item Agregado a sú Carrito!');
     }
 

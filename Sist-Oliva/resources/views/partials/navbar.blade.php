@@ -5,7 +5,18 @@
             OLIVA DISEÑO E IMPRENTA
         </a>
        
-       <a href="{{route('login')}}">Log-in | </a><a href="{{route('logout')}}">Log out</a>
+       <a href="{{route('login')}}">Log-in | </a>
+       
+       <form method="POST" action="{{ route('logout') }}">
+        @csrf
+            <a href="{{ route('logout') }}"
+           onclick="event.preventDefault();
+                    this.closest('form').submit();">
+            Logout
+            </a>
+        </form>
+     
+    
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
