@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutContorller;
 use App\Http\Controllers\ProductoController;
+use App\Models\Producto;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,8 +26,13 @@ Route::post('/update', [CartController::class, 'update'])->name('cart.update');
 Route::post('/remove', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
 
-/*RUTAS DEL PRODUCTO*/
-Route::get('/producto{id}', [ProductoController::class, 'show'])->name('producto.show');
+/*RUTAS DEL ABM PRODUCTO*/
+
+Route::resource('productos', ProductoController::class);
+Route::get('/productos{id}',[ProductoController::class,'detalle'])->name('producto.detalle');
+
+
+
 
 /*RUTAS DEL CHECKOUT*/
 Route::get('/checkout', [CheckoutContorller::class, 'index'])->middleware(['auth', 'verified'])->name('checkout.index');

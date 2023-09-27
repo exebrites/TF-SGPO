@@ -4,9 +4,9 @@
             {{-- E-COMMERCE TIENDA --}}
             OLIVA DISEÑO E IMPRENTA
         </a>
-       
+       @guest
        <a href="{{route('login')}}">Log-in | </a>
-       
+        @else
        <form method="POST" action="{{ route('logout') }}">
         @csrf
             <a href="{{ route('logout') }}"
@@ -15,8 +15,29 @@
             Logout
             </a>
         </form>
-     
-    
+        <a href="/welcome">Administracion</a>
+        @endguest
+
+        {{-- menu desplegable --}}
+      
+
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Cuenta
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li><a class="dropdown-item" href="#">Login</a></li>
+                      <li><a class="dropdown-item" href="#">Logout</a></li>
+                      <li><a class="dropdown-item" href="#">Administracion</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -44,6 +65,8 @@
                 </li>
             </ul>
         </div>
+
+        
     </div>
 </nav>
 

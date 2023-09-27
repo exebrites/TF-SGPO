@@ -312,18 +312,23 @@ return [
             'can'  => 'manage-blog',
         ],
        
-        ['header' => 'Configuracion de cuenta'],
-        [
-            'text' => 'Perfil',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Cambiar contraseña',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-       
+        // ['header' => 'Configuracion de cuenta'],
+        // [
+        //     'text' => 'Perfil',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
+        // [
+        //     'text' => 'Cambiar contraseña',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-lock',
+        // ],
+       //Productos *se puede usar {{route(...)}}(?
+       [
+        //'route'=> 'ruta'
+        'text' => 'Producto', 
+        'route' => 'productos.index',
+       ],
       
     ],
 

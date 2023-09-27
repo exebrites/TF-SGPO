@@ -53,7 +53,9 @@
                         <div class="col-lg-5">
                             <p>
                                 {{-- <b><a href="/shop/{{ $item->attributes->slug }}">{{ $item->name }}</a></b><br> --}}
-                                <b><a href="{{route('producto.show',['id'=>$item->id])}}">{{ $item->name }}</a></b><br>
+                                    
+                                {{-- Arreglar esta parte esta rota --}}
+                                {{-- <b><a href="{{route('productos.show',$item)}}">{{ $item->name }}</a></b><br> --}}
                                 <b>Price: </b>${{ $item->price }}<br>
                                 <b>Sub Total: </b>${{ \Cart::get($item->id)->getPriceSum() }}<br>
                                 {{--                                <b>With Discount: </b>${{ \Cart::get($item->id)->getPriceSumWithConditions() }}--}}

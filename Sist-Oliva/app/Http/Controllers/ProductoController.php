@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Producto;
+use SebastianBergmann\Environment\Runtime;
+
 class ProductoController extends Controller
 {
     /**
@@ -11,12 +14,12 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        //
-        // dd($request);
-        // $producto=Producto::all();
-        // return view('producto')->with(['producto'=>$producto]);
+
+        $productos = Producto::all();
+        // dd($producto);
+        return view('producto.index', ['productos' => $productos]);
     }
 
     /**
@@ -26,7 +29,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+        return view('producto.create');
     }
 
     /**
@@ -37,7 +40,23 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validar los campos que ingresa
+
+
+        Producto::create(
+            [
+                'name' => $request->name,
+                'price' => $request->price,
+                'slug' => $request->name,
+                'description' => $request->description,
+                'category_id' => 1,
+                'image_path' => 'cosito'
+            ]
+        );
+        // return redirect()->route('productos.index');
+        //   return redirect()->route('productos.edit',['producto'=>$producto]);
+        // return view('producto.edit', ['producto' => $producto]);
+        return redirect()->route('productos.index');
     }
 
     /**
@@ -46,13 +65,14 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Producto $id)
     {
         //
         // dd($id);
-        $producto=Producto::find($id);
+        // $producto = Producto::find($id);
         // dd($producto);
-        return view('producto')->with(['producto'=>$producto]);
+        // return view('producto')->with(['producto' => $producto]);
+        return $id;
     }
 
     /**
@@ -63,7 +83,10 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {
-        //
+        // return view('producto.edit', compact('id'));
+
+        $producto = Producto::find($id);
+        return view('producto.edit', ['producto' => $producto]);
     }
 
     /**
@@ -75,7 +98,21 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $producto=Producto::updated()
+        // return view('producto.edit', ['producto' => $producto]);
+
+        /*ERROR AL ACTUALIZAR*/
+        $producto = Producto::find($request->id)->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'slug' => $request->name,
+            'description' => $request->description,
+            'category_id' => 1,
+            'image_path' => 'cosito'
+        ]);
+        // actualiza pero falta el la vista
+        // return $producto;
+        return redirect()->route('productos.index');
     }
 
     /**
@@ -86,6 +123,19 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $producto = Producto::find($id);
+        $producto->delete();
+        //elimina pero falta la vista 
+        // return "borrado";
+        return redirect()->route('productos.index');
+    }
+
+    //idea manejar con otra funcion la parte del detalle de productos
+    public function detalle($id)
+    {
+
+        $pro = Producto::find($id);
+
+        return view('detalleProducto', ['pro' => $pro]);
     }
 }

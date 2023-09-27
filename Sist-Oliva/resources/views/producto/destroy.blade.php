@@ -3,10 +3,9 @@
 @section('title')
 
 @section('content_header')
-    <h1>Pagina de inicio</h1>
+    <h1>Eliminar producto</h1>
 @stop
 
 @section('content')
-   asda
+   
 @stop
-
