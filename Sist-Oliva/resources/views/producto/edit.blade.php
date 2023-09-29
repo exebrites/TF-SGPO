@@ -26,6 +26,8 @@
 
             </div>
             {!! Form::submit('Actualizar producto',['class'=>'btn btn-primary'])  !!}
+            <a class="btn btn-danger" href="{{route('productos.index')}}">Cancelar</a>
+
         {!! Form::close() !!}
 
     </div>

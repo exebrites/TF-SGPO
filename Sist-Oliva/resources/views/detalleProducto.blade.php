@@ -9,7 +9,7 @@
     {{-- {{dd($pro);}} --}}
         <div class="col-lg-3">
             <div class="card" style="margin-bottom: 20px; height: auto;">
-                <img src="/images/{{ $pro->image_path }}"
+                <img src="{{ $pro->image_path }}"
                      class="card-img-top mx-auto"
                      style="height: 150px; width: 150px;display: block;"
                      alt="{{ $pro->image_path }}"

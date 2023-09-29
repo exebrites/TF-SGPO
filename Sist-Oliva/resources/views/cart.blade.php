@@ -48,7 +48,7 @@
                 {{-- {{dd($item)}} --}}
                     <div class="row">
                         <div class="col-lg-3">
-                            <img src="/images/{{ $item->attributes->imagen_path }}" class="img-thumbnail" width="200" height="200">
+                            <img src="{{ $item->attributes->imagen_path }}" class="img-thumbnail" width="200" height="200">
                         </div>
                         <div class="col-lg-5">
                             <p>

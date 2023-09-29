@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutContorller;
+use App\Http\Controllers\fileController;
 use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
 
@@ -37,7 +38,9 @@ Route::get('/productos{id}',[ProductoController::class,'detalle'])->name('produc
 /*RUTAS DEL CHECKOUT*/
 Route::get('/checkout', [CheckoutContorller::class, 'index'])->middleware(['auth', 'verified'])->name('checkout.index');
 
-
+//file
+// route::get('/file',[fileController::class,'index'])->name('file.index');
+// route::post('/file',[fileController::class,'store'])->name('file.store');
 
 
 

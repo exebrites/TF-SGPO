@@ -7,6 +7,6 @@
 @stop
 
 @section('content')
-   asda
+   
 @stop
 

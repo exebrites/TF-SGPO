@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use SebastianBergmann\Environment\Runtime;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -41,7 +42,8 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //validar los campos que ingresa
-
+        $imagen =  $request->file('file')->store('public');
+        $url = Storage::url($imagen);
 
         Producto::create(
             [
@@ -50,10 +52,10 @@ class ProductoController extends Controller
                 'slug' => $request->name,
                 'description' => $request->description,
                 'category_id' => 1,
-                'image_path' => 'cosito'
+                'image_path' => $url
             ]
         );
-        // return redirect()->route('productos.index');
+
         //   return redirect()->route('productos.edit',['producto'=>$producto]);
         // return view('producto.edit', ['producto' => $producto]);
         return redirect()->route('productos.index');
@@ -106,7 +108,7 @@ class ProductoController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'slug' => $request->name,
-            'description' => $request->description,
+            'description' => $request->description, //recibir de file.store la URL
             'category_id' => 1,
             'image_path' => 'cosito'
         ]);
