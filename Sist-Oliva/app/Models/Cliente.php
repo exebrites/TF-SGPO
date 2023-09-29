@@ -9,6 +9,7 @@ use App\Models\SistOliva;
 class Cliente extends Model
 {
 
+    protected $fillable = ['DNI','nombre','apellido','correo','telefono','idSistema'];
 /*----------------------------ATRIBUTOS----------------------------------------*/
   
 

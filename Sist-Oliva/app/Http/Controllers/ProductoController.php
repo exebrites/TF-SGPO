@@ -104,7 +104,7 @@ class ProductoController extends Controller
         // return view('producto.edit', ['producto' => $producto]);
 
         /*ERROR AL ACTUALIZAR*/
-        $producto = Producto::find($request->id)->update([
+        Producto::find($request->id)->update([
             'name' => $request->name,
             'price' => $request->price,
             'slug' => $request->name,

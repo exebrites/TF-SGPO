@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutContorller;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\fileController;
 use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
@@ -18,17 +19,15 @@ use App\Models\Producto;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-/*RUTAS DEL CARRITO DE COMPRAS*/
 
-Route::get('/', [CartController::class, 'shop'])->name('shop');
-Route::get('/cart', [CartController::class, 'cart'])->name('cart.index');
-Route::post('/add', [CartController::class, 'add'])->name('cart.store');
-Route::post('/update', [CartController::class, 'update'])->name('cart.update');
-Route::post('/remove', [CartController::class, 'remove'])->name('cart.remove');
-Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
+
+/*RUTAS DEL ABM CLIENTE*/
+Route::resource('clientes',ClienteController::class);
+
+
+
 
 /*RUTAS DEL ABM PRODUCTO*/
-
 Route::resource('productos', ProductoController::class);
 Route::get('/productos{id}',[ProductoController::class,'detalle'])->name('producto.detalle');
 
@@ -38,12 +37,18 @@ Route::get('/productos{id}',[ProductoController::class,'detalle'])->name('produc
 /*RUTAS DEL CHECKOUT*/
 Route::get('/checkout', [CheckoutContorller::class, 'index'])->middleware(['auth', 'verified'])->name('checkout.index');
 
-//file
-// route::get('/file',[fileController::class,'index'])->name('file.index');
-// route::post('/file',[fileController::class,'store'])->name('file.store');
 
 
 
+
+/*RUTAS DEL CARRITO DE COMPRAS*/
+
+Route::get('/', [CartController::class, 'shop'])->name('shop');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart.index');
+Route::post('/add', [CartController::class, 'add'])->name('cart.store');
+Route::post('/update', [CartController::class, 'update'])->name('cart.update');
+Route::post('/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
 
 
 /*RUTAS DEL PANEL DE ADMINISTRACION*/
