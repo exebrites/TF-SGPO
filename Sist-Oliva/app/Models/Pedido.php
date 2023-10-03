@@ -9,7 +9,8 @@ use App\Models\Producto;
 
 class Pedido extends Model
 {
-
+    protected $fillable = ['clientes_id', 'productos_id', 'fecha_inicio', 'fecha_entrega', 'estado', 'disenio_estado', 'cantidad','subtotal'];
+  
     /*----------------------------ATRIBUTOS----------------------------------------*/
 
 
@@ -28,11 +29,11 @@ class Pedido extends Model
 
     public function productos()
     {
-        return $this->hasMany(Producto::class,'producto_id');
+        return $this->hasMany(Producto::class, 'producto_id');
     }
     public function clientes()
     {
-        return $this->hasMany(Cliente::class,'cliente_id');
+        return $this->hasMany(Cliente::class, 'cliente_id');
     }
 
     use HasFactory;

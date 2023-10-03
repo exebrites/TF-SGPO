@@ -70,14 +70,13 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Producto $id)
+    public function show($id)
     {
         //
         // dd($id);
-        // $producto = Producto::find($id);
+        $producto = Producto::find($id);
         // dd($producto);
-        // return view('producto')->with(['producto' => $producto]);
-        return $id;
+        return view('producto.show', ['producto' => $producto]);
     }
 
     /**
@@ -119,7 +118,7 @@ class ProductoController extends Controller
             'description' => $request->description,
             'category_id' => 1,
             'image_path' => "cosito"
-            
+
         ]);
 
         // return $request;

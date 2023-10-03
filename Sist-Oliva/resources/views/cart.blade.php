@@ -98,6 +98,8 @@
                     </div>
                     <br><a href="/" class="btn btn-dark">Continue en la tienda</a>
                     <a href="{{route('checkout.index')}}" class="btn btn-success">Proceder al Checkout</a>
+                    {{-- --}}
+                    <br>
                 </div>
             @endif
         </div>

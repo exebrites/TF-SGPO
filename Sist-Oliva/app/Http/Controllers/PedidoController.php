@@ -58,8 +58,8 @@ class PedidoController extends Controller
      */
     public function edit($id)
     {
-        return view('pedido.edit');
-        // return 'editar';
+        // return view('pedido.edit');
+        return 'editar el estado pedido y otros campos si fuese necesario';
     }
 
     /**

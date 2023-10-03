@@ -5,7 +5,18 @@
             OLIVA DISEÑO E IMPRENTA
         </a>
        @guest
-       <a href="{{route('login')}}">Log-in  </a>
+       <div class="dropdown">
+       
+         <a class=" dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+            Menu
+        </a> 
+      
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{route('register')}}">Registrarse </a>
+            <a class="dropdown-item" href="{{route('login')}}">Log-in  </a>
+          
+        </div>
+      </div>
         @else
        
      

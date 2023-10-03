@@ -23,10 +23,8 @@ return new class extends Migration
             $table->date('fecha_entrega');
             $table->boolean('estado');
             $table->boolean('disenio_estado');
-            //FALTA RELACIONAR
-
-            // $table->unsignedBigInteger('idSistema')->unique();
-            // $table->foreign('idSistema')->references('id')->on('SistOliva')->onDelete('cascade');
+            $table->integer('cantidad');
+            $table->float('subtotal');
 
             $table->foreign('clientes_id')->references('id')->on('clientes')->onDelete('cascade');
             $table->foreign('productos_id')->references('id')->on('productos')->onDelete('cascade');
