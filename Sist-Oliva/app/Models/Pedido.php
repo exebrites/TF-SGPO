@@ -4,18 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\SistOliva;
+use App\Models\Cliente;
 use App\Models\Producto;
+
 class Pedido extends Model
 {
 
-/*----------------------------ATRIBUTOS----------------------------------------*/
-  
-
-/*----------------------------METODOS-----------------------------------------*/
+    /*----------------------------ATRIBUTOS----------------------------------------*/
 
 
-/*----------------------------RELACIONES----------------------------------------*/
+    /*----------------------------METODOS-----------------------------------------*/
+
+
+    /*----------------------------RELACIONES----------------------------------------*/
 
     /*AGREGAR ATRIBUTOS*/
 
@@ -25,11 +26,14 @@ class Pedido extends Model
 
     //SIN PROBAR 
 
-    public function sistOliva(){
-        return $this->hasMany(SistOliva::class);
+    public function productos()
+    {
+        return $this->hasMany(Producto::class,'producto_id');
     }
-    public function producto(){
-        return $this->belongsTo(Producto::class);
+    public function clientes()
+    {
+        return $this->hasMany(Cliente::class,'cliente_id');
     }
+
     use HasFactory;
 }

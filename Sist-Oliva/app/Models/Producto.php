@@ -51,8 +51,9 @@ class Producto extends Model
         return $this->hasMany(SistOliva::class,'idSistema');
     }
     
-    public function pedido (){
-        return $this->hasMany(Pedido::class);
+    public function pedido()
+    {
+        return $this->belongsTo(Pedido::class);
     }
 
     use HasFactory;

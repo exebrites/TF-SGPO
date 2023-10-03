@@ -15,11 +15,21 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-
-                        //FALTA RELACIONAR
+            $table->unsignedBigInteger('clientes_id');
+            $table->unsignedBigInteger('productos_id');
+            //clientes_id
+            //productos_id
+            $table->date('fecha_inicio');
+            $table->date('fecha_entrega');
+            $table->boolean('estado');
+            $table->boolean('disenio_estado');
+            //FALTA RELACIONAR
 
             // $table->unsignedBigInteger('idSistema')->unique();
             // $table->foreign('idSistema')->references('id')->on('SistOliva')->onDelete('cascade');
+
+            $table->foreign('clientes_id')->references('id')->on('clientes')->onDelete('cascade');
+            $table->foreign('productos_id')->references('id')->on('productos')->onDelete('cascade');
 
             $table->timestamps();
         });

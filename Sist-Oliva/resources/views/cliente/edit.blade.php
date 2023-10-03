@@ -7,33 +7,29 @@
 @stop
 
 @section('content')
-{{-- {{dd($cliente)}} --}}
-<div class="card">
+ {{-- {{dd($cliente)}}  
+
+
+{{-- Como hacer para traer los datos --}}
+   <div class="card">
     <div class="card-body">
-        {{-- adaptarlo para clientes
-          
-            --}}
-
-            {!! Form::model($cliente,['route'=>['clientes.update',$cliente],'method'=>'put']) !!}
+      <form action="{{route('clientes.update',$cliente)}}" method="post" >
+        @csrf
+        @method('PUT')
+          <div class="form-group">
+            <label>id</label>
+            <input type="text" class="form-control" name="id" value={{$cliente->id}}>
+          </div>
             <div class="form-group">
-                {!! Form::label('id','Identificador') !!}
-                {!! Form::text('id',null,['class'=>'form-control','readonly']) !!}
-
-                {!! Form::label('nombre','Nombre') !!}
-                {!! Form::text('nombre',null,['class'=>'form-control','placeholder'=>'ingrese el nombre del cliente']) !!}
-{{-- 
-                {!! Form::label('price','Precio') !!}
-                {!! Form::text('price',null,['class'=>'form-control','placeholder'=>'ingrese el precio del producto']) !!}
-
-                {!! Form::label('description','Descripcion') !!}
-                {!! Form::text('description',null,['class'=>'form-control','placeholder'=>'ingrese la descripcion del producto']) !!} --}}
-
+              <label>Nombre</label>
+              <input type="text" class="form-control" name="nombre" value={{$cliente->nombre}}>
             </div>
-            {!! Form::submit('Actualizar cliente',['class'=>'btn btn-primary'])  !!}
-            <a class="btn btn-danger" href="{{route('clientes.index')}}">Cancelar</a>
+         
 
-        {!! Form::close() !!}
-
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      
+   <a href="{{route('clientes.index')}}" class="btn btn-danger">Cancelar</a>
     </div>
    </div>
 @stop

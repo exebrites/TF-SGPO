@@ -15,15 +15,16 @@ return new class extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();//DNI como PK (?
-            $table->string('DNI');
+            $table->string('dni');
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('correo');
             $table->string('telefono');
+            $table->string('correo');
+          
 
             //FALTA RELACIONAR
-            $table->unsignedBigInteger('idSistema');
-            $table->foreign('idSistema')->references('id')->on('sist_olivas')->onDelete('cascade');
+            // $table->unsignedBigInteger('idSistema');
+            // $table->foreign('idSistema')->references('id')->on('sist_olivas')->onDelete('cascade');
 
             $table->timestamps();
         });

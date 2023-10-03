@@ -8,28 +8,50 @@
 
 @section('content')
 {{-- {{dd($producto);}} --}}
+
+
+{{-- Como hacer para traer los datos --}}
 <div class="card">
     <div class="card-body">
-        {!! Form::model($producto,['route'=>['productos.update',$producto],'method'=>'put']) !!}
-            <div class="form-group">
-                {!! Form::label('id','Identificador') !!}
-                {!! Form::text('id',null,['class'=>'form-control','readonly']) !!}
-
-                {!! Form::label('name','Nombre') !!}
-                {!! Form::text('name',null,['class'=>'form-control','placeholder'=>'ingrese el nombre del producto']) !!}
-
-                {!! Form::label('price','Precio') !!}
-                {!! Form::text('price',null,['class'=>'form-control','placeholder'=>'ingrese el precio del producto']) !!}
-
-                {!! Form::label('description','Descripcion') !!}
-                {!! Form::text('description',null,['class'=>'form-control','placeholder'=>'ingrese la descripcion del producto']) !!}
-
+      <form action="{{route('productos.update',$producto)}}" method="post" >
+        @csrf
+        @method('PUT')
+        <div class="form-group">
+          <label >identificador</label>
+          <input type="text" class="form-control" aria-describedby="emailHelp" value="{{$producto->id}}" name="id">
+        </div>
+        <div class="form-group">
+              <label >Nombre</label>
+              <input type="text" class="form-control" aria-describedby="emailHelp" value="{{$producto->name}}" name="name">
             </div>
-            {!! Form::submit('Actualizar producto',['class'=>'btn btn-primary'])  !!}
-            <a class="btn btn-danger" href="{{route('productos.index')}}">Cancelar</a>
 
-        {!! Form::close() !!}
+            <div class="form-group">
+              <label for="exampleInputPassword1">Precio</label>
+              <input type="text" class="form-control"  value="{{$producto->price}}" name="price">
+            </div>
 
+            
+            <div class="form-group">
+                <label for="exampleInputPassword1">Descripcion</label>
+                <input type="text" class="form-control" value="{{$producto->description}}" name="description">
+              </div>
+          
+              <div class="card-body">
+                <img src="{{$producto->image_path}}" alt="" srcset="">
+              </div>
+
+       
+            <div class="form-group">
+              <label>Seleccionar imagen</label>
+              <input type="file" class="form-control-file" value="{{$producto->image_path}}"  name="file" >
+            </div>
+         
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      
+      <a class="btn btn-danger" href="http://">Cancelar</a>
     </div>
    </div>
+
 @stop

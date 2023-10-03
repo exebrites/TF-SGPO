@@ -41,11 +41,12 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
+
         //validar los campos que ingresa
         $imagen =  $request->file('file')->store('public');
         $url = Storage::url($imagen);
 
-        Producto::create(
+        $producto = Producto::create(
             [
                 'name' => $request->name,
                 'price' => $request->price,
@@ -59,6 +60,8 @@ class ProductoController extends Controller
         //   return redirect()->route('productos.edit',['producto'=>$producto]);
         // return view('producto.edit', ['producto' => $producto]);
         return redirect()->route('productos.index');
+
+        //    return $request;
     }
 
     /**
@@ -100,20 +103,26 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $producto=Producto::updated()
-        // return view('producto.edit', ['producto' => $producto]);
 
-        /*ERROR AL ACTUALIZAR*/
+        /*URL no funciona*/
+        // $imagen =  $request->file('file')->store('public');
+        // if( $imagen == null){
+        //     $imagen="cosito";
+        // }
+        // $url = Storage::url($imagen);
+
+
         Producto::find($request->id)->update([
             'name' => $request->name,
             'price' => $request->price,
             'slug' => $request->name,
-            'description' => $request->description, //recibir de file.store la URL
+            'description' => $request->description,
             'category_id' => 1,
-            'image_path' => 'cosito'
+            'image_path' => "cosito"
+            
         ]);
-        // actualiza pero falta el la vista
-        // return $producto;
+
+        // return $request;
         return redirect()->route('productos.index');
     }
 

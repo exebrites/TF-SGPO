@@ -326,6 +326,11 @@ return [
        //Productos *se puede usar {{route(...)}}(?
        [
         //'route'=> 'ruta'
+        'text' => 'Tienda', 
+        'route' => 'shop',
+       ],
+       [
+        //'route'=> 'ruta'
         'text' => 'Gestionar Productos', 
         'route' => 'productos.index',
        ],
@@ -333,6 +338,11 @@ return [
         //'route'=> 'ruta'
         'text' => 'Gestionar Clientes', 
         'route' => 'clientes.index',
+       ],
+       [
+        //'route'=> 'ruta'
+        'text' => 'Gestionar Pedidos', 
+        'route' => 'pedidos.index',
        ],
       
     ],

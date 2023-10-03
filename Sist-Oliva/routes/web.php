@@ -6,8 +6,11 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutContorller;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\fileController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\PruebaController;
 use App\Models\Producto;
+use Illuminate\Routing\RouteRegistrar;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +22,17 @@ use App\Models\Producto;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+/*RUTAS DE PRUEBAS*/
+
+Route::get('/prueba',[PruebaController::class,'index'])->name('prueba.index');
+
+/*FIN RUTAS DE PRUEBAS*/
+
+
+/*RUTAS DEL ABM PEDIDOS*/
+Route::resource('pedidos',PedidoController::class);
 
 
 /*RUTAS DEL ABM CLIENTE*/

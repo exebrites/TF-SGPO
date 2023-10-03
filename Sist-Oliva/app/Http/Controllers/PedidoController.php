@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pedido;
 use Illuminate\Http\Request;
-use App\Models\Cliente;
 
-class ClienteController extends Controller
+class PedidoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::all();
-        return view('cliente.index', ['clientes' => $clientes]);
+        $pedidos=Pedido::all();
+       return view('pedido.index',['pedidos'=>$pedidos]);
     }
 
     /**
@@ -25,8 +25,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-
-        return view('cliente.create');
+        return view('pedido.create');
     }
 
     /**
@@ -37,21 +36,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-
-        Cliente::create(
-            [
-                'dni' => $request->DNI,
-                'nombre' => $request->nombre,
-                'apellido' => '',
-                'telefono' => '',
-                'correo' => ''
-                
-               
-            ]
-        );
-        return redirect()->route('clientes.index');
-
-        // return $request;
+        //
     }
 
     /**
@@ -73,11 +58,8 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        // return $id;
-        $cliente=Cliente::find($id);
-        //  return $cliente;
-        return view('cliente.edit',['cliente'=>$cliente]);
-        
+        return view('pedido.edit');
+        // return 'editar';
     }
 
     /**
@@ -89,12 +71,7 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return $request;
-        Cliente::find($request->id)->update([
-            'nombre' => $request->nombre
-        ]);
-        
-        return redirect()->route('clientes.index');
+        //
     }
 
     /**
@@ -105,8 +82,6 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        $cliente=Cliente::find($id);
-        $cliente->delete();
-        return redirect()->route('clientes.index');
+        //
     }
 }

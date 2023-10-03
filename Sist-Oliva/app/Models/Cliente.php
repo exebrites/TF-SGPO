@@ -9,7 +9,7 @@ use App\Models\SistOliva;
 class Cliente extends Model
 {
 
-    protected $fillable = ['DNI','nombre','apellido','correo','telefono','idSistema'];
+    protected $fillable = ['dni','nombre','apellido','telefono','correo'];
 /*----------------------------ATRIBUTOS----------------------------------------*/
   
 
@@ -26,8 +26,9 @@ class Cliente extends Model
     
     //SIN PROBAR 
 
-    public function sistOliva(){
-        return $this->belongsTo(SistOliva::class);
+    public function pedido()
+    {
+        return $this->belongsTo(Pedido::class);
     }
 
     use HasFactory;
