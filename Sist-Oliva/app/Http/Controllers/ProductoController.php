@@ -42,7 +42,24 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
 
+        $request->validate([
+            'name'=> ['required '],
+            'price'=> ['required '],
+            'description'=> ['required '],
+            'file'=> ['required ']
+        ]);
+
         //validar los campos que ingresa
+
+/**
+ *  $request->file('file'): Este código asume que en el formulario de la solicitud HTTP 
+ * (por ejemplo, un formulario HTML) se ha enviado un archivo con el nombre "file". 
+ * $request es un objeto que representa la solicitud HTTP y file('file') obtiene el archivo enviado con ese nombre.
+ * ->store('public'): Después de obtener el archivo, se llama al método store('public'). 
+ * Esto almacena el archivo en la ubicación especificada en el sistema de archivos de Laravel.
+ * En este caso, los archivos se guardarán en el directorio "public" de la aplicación.
+*/
+
         $imagen =  $request->file('file')->store('public');
         $url = Storage::url($imagen);
 
@@ -110,6 +127,12 @@ class ProductoController extends Controller
         // }
         // $url = Storage::url($imagen);
 
+        $request->validate([
+            'name'=> ['required '],
+            'price'=> ['required '],
+            'description'=> ['required '],
+            'file'=> ['required ']
+        ]);
 
         Producto::find($request->id)->update([
             'name' => $request->name,

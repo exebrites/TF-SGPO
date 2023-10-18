@@ -94,6 +94,9 @@ class ClienteController extends Controller
     public function update(Request $request, $id)
     {
         // return $request;
+        $request->validate([
+            'nombre'=>['required']
+        ]);
         Cliente::find($request->id)->update([
             'nombre' => $request->nombre
         ]);

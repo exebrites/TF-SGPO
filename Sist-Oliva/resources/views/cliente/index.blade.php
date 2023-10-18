@@ -10,10 +10,12 @@
 {{-- {{dd($clientes)}} --}}
 <div class="card">
     <div class="card-header">
-        {{-- Agregar 
-            " 
+        {{-- 
+
+            !!Es posible agregar un nuevo cliente? Estos se registran atreves de la web (?
+            
             --}}
-        <a  href="{{route('clientes.create')}}"  class="btn btn-success" >Agregar nuevo cliente</a>
+        {{-- <a  href="{{route('clientes.create')}}"  class="btn btn-success" >Agregar nuevo cliente</a> --}}
     </div>
     <div class="card-body">
         <table class="table table-striped">

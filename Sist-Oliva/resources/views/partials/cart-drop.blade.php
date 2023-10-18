@@ -38,7 +38,7 @@
             CARRITO <i class="fa fa-arrow-right"></i>
         </a>
         <a class="btn btn-dark btn-sm btn-block" href="{{route('checkout.index')}}">
-            CHECKOUT <i class="fa fa-arrow-right"></i>
+           FINALIZAR COMPRA <i class="fa fa-arrow-right"></i>
         </a>
     </div>
 @else

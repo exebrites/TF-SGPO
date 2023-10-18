@@ -97,7 +97,7 @@
                         </ul>
                     </div>
                     <br><a href="/" class="btn btn-dark">Continue en la tienda</a>
-                    <a href="{{route('checkout.index')}}" class="btn btn-success">Proceder al Checkout</a>
+                    <a href="{{route('checkout.index')}}" class="btn btn-success">Finalizar compra</a>
                     {{-- --}}
                     <br>
                 </div>

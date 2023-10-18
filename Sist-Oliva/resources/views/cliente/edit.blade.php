@@ -18,18 +18,23 @@
         @method('PUT')
           <div class="form-group">
             <label>id</label>
-            <input type="text" class="form-control" name="id" value={{$cliente->id}}>
+            <input type="text" class="form-control" name="id" value={{$cliente->id}} Readonly >
           </div>
             <div class="form-group">
               <label>Nombre</label>
               <input type="text" class="form-control" name="nombre" value={{$cliente->nombre}}>
+              @error('nombre')
+              <br>
+              <small style="color:red">{{$message}}</small>
+          @enderror
             </div>
          
 
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Actualizar cliente</button>
         </form>
       
    <a href="{{route('clientes.index')}}" class="btn btn-danger">Cancelar</a>
     </div>
    </div>
 @stop
+

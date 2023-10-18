@@ -3,7 +3,7 @@
 @section('title')
 
 @section('content_header')
-    <h1>Lsitado de pedidos</h1>
+    <h1>Listado de pedidos</h1>
 @stop
 
 @section('content')
@@ -19,7 +19,7 @@
                 <tr>
                     <th>Nro de pedido</th>
                     <th>Cliente</th>
-                    <th>Producto</th>
+                    <th>Alias producto</th>
                     <th>Estado</th>
                     <th>Diseño</th>
 
@@ -36,8 +36,8 @@
                     <tr>
                         <td>{{$item->id}}</td>
                         <td><a href="{{route('clientes.show',$item->clientes_id)}}">{{$item->clientes_id}}</a></td>
-                        <td><a href="{{route('productos.show',$item->productos_id)}}">{{$item->productos_id}}</a></td>
-
+                        {{-- <td><a href="{{route('productos.show',$item->productos_id)}}">{{$item->productos_id}}</a></td> --}}
+<td></td>
                         <td>En proceso/Terminado</td>
                         <td>Si/No</td>
                         <td>{{$item->cantidad}}</td>

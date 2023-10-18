@@ -6,11 +6,15 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutContorller;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\fileController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PruebaController;
+use App\Mail\PagoMailable;
 use App\Models\Producto;
 use Illuminate\Routing\RouteRegistrar;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\prueba;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +28,39 @@ use Illuminate\Routing\RouteRegistrar;
 */
 
 
+
+Route::get('/boceto',function(){
+    return view('boceto');
+})->name('boceto');
+
 /*RUTAS DE PRUEBAS*/
+Route::get('/email',function(){
+
+    Mail::to('exequiel@gmail.com')->send(new prueba);
+    return 'mensaje enviado';
+});
 
 Route::get('/prueba',[PruebaController::class,'index'])->name('prueba.index');
+Route::post('/prueba',[PruebaController::class,'imagen'])->name('prueba');
+
 
 /*FIN RUTAS DE PRUEBAS*/
 
+/**
+ * RUTAS DE MAILS
+ * 
+ * 
+ * 
+ * 
+*/
+Route::get('/pago',[MailController::class,'pago'])->name('pago');
+Route::post('/comprobante',[MailController::class,'comprobante'])->name('comprobante');
+
+/**
+ * 
+ * 
+ * FIN RUTAS DE MAILS
+*/
 
 /*RUTAS DEL ABM PEDIDOS*/
 Route::resource('pedidos',PedidoController::class);

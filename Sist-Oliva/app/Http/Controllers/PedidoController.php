@@ -84,4 +84,37 @@ class PedidoController extends Controller
     {
         //
     }
+
+    //FIN DE FUNCIONES DE GESTIONAR PEDIDO
+
+    // public function procesarPedido(Request $request)
+    // {
+    //     // nunca va procesar pedido con un carrito en blanco 
+
+    //     //   return \Cart::getSubTotal();
+
+    //     //    'clientes_id','productos_id','fecha_inicio','fecha_entrega','estado','disenio_estado'];
+
+    //     //\Cart::getContent() que retorna?
+    //     $producto = \Cart::getContent();
+    //     //   dd($producto);
+    //     foreach ($producto as $p) {
+    //         $pedido = Pedido::create([
+    //             'clientes_id' => Auth::user()->id,
+    //             'productos_id' => $p->id,
+    //             'fecha_inicio' => '2000-02-01',
+    //             'fecha_entrega' => '2000-02-01',
+    //             'estado' => true,
+    //             'disenio_estado' => true,
+    //             'cantidad' => $p->quantity,
+    //             'subtotal' => \Cart::getSubTotal()
+
+    //         ]);
+    //     }
+
+    //     \Cart::clear();
+    //     return redirect()->route('shop')->with('success_msg', 'Su pedido se realizó con éxito!');
+
+    //     // 
+    // }
 }

@@ -1,4 +1,9 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="/css/app.css">
+
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
+
 
 @section('content')
 
@@ -7,7 +12,7 @@
 <br>
 <div class="row">
     {{-- {{dd($pro);}} --}}
-        <div class="col-lg-3">
+        <div class="col-4">
             <div class="card" style="margin-bottom: 20px; height: auto;">
                 <img src="{{ $pro->image_path }}"
                      class="card-img-top mx-auto"
@@ -39,7 +44,54 @@
             </div>
         </div>
 
+        <div class="col-8">
+            <div class="card" style="margin-bottom: 20px; height: auto;">
+                <div class="card-body">
+               <h3>En caso de tener un diseño propio subirlo aqui</h3>
+               {{-- dropzone --}}
+
+               {{-- default: name=file --}}
+                <form action="{{route('prueba')}}"
+                    method="post"
+                    class="dropzone"
+                     id="my-awesome-dropzone">
+                 </form>     
+                 <a href="" data-dz-remove >Resubir imagen</a>
+
+
+
+               {{-- <form action="" method="post">
+                <label for="">Subir diseño</label>
+                <br>
+                <input type="file" name="" id="">
+                <br>
+                <input type="submit" class="btn btn-success" value="Enviar">
+               </form> --}}
+            </div>
+               <h3>No tienes un diseño propio? Hace click aquí <a href="{{Route('boceto')}}" class="btn btn-primary">Hacer un diseño</a></h3>
+            </div>
+           
+        </div>
+
 </div>
 
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 
+<script>
+  // Note that the name "myDropzone" is the camelized
+  // id of the form.
+  Dropzone.options.myAwesomeDropzone = {
+    // Configuration options go here
+    headers:{
+       'X-CSRF-TOKEN':"{{csrf_token()}}"
+    },
+    dictDefacultMessage:"Arrastre una imagen al recuadro para subirlo" ,
+    acceptedFiles: "image/*",
+    maxFilesize: 4, //en MB's
+    maxFiles:1,
+// paramName:'' //cambiar el name
+  };
+</script>
+ <script src="/js/app.js"></script>
+ 
 @endsection
