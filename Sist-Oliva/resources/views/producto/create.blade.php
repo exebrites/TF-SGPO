@@ -60,7 +60,7 @@
              {{--!! Agregar un alias o nomenclaruta !!--}}
             <div class="form-group">
               <label>Alias</label>
-              <input type="text" class="form-control" name="" value="{{old('')}}">
+              <input type="text" class="form-control" name="alias" value="{{old('')}}">
               {{-- @error('name')
               <br>
               <small style="color:red">{{$message}}</small>

@@ -18,7 +18,7 @@ return new class extends Migration
                
      
                 $table->id();
-                $table->string('name')->unique();
+                $table->string('name');
                 $table->string('slug')->unique();
                 
                 $table->double('price');
@@ -27,6 +27,7 @@ return new class extends Migration
                 $table->integer('category_id')->nullalble();
              
                 $table->string('image_path');
+                $table->string('alias');
        
                 // $table->id();
                 // $table->string('name')->unique();

@@ -50,16 +50,29 @@
         <form action="{{route('clientes.store')}}" method="post">
           @csrf
            <div class="form-group">
-              <label >DNI</label>
-              <input type="text" class="form-control" name="DNI">
+              <label >Nro documento</label>
+              <input type="text" class="form-control" name="dni">
             </div>
             <div class="form-group">
               <label >Nombre</label>
               <input type="text" class="form-control" name="nombre">
             </div>
+            <div class="form-group">
+              <label >Apellido</label>
+              <input type="text" class="form-control" name="apellido">
+            </div>
+            <div class="form-group">
+              <label >Telefono</label>
+              <input type="text" class="form-control" name="telefono">
+            </div>
+            <div class="form-group">
+              <label >Correo electronico</label>
+              <input type="text" class="form-control" name="correo">
+            </div>
 
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
         </form>      
+        <a class="btn btn-danger" href="{{route('clientes.index')}}">Cancelar</a>
     </div>
    </div>
 @stop

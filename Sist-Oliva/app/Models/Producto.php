@@ -12,7 +12,7 @@ use App\Models\Categoria;
 class Producto extends Model
 {
     protected $table = 'productos';
-    protected $fillable = ['name','price','slug','description','category_id','image_path'];
+    protected $fillable = ['name','price','slug','description','category_id','image_path','alias'];
 /*----------------------------ATRIBUTOS----------------------------------------*/
     /*AGREGAR ATRIBUTOS*/
     private string $nombre;

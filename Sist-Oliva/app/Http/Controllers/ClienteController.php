@@ -41,11 +41,11 @@ class ClienteController extends Controller
 
         Cliente::create(
             [
-                'dni' => $request->DNI,
+                'dni' => $request->dni,
                 'nombre' => $request->nombre,
-                'apellido' => '',
-                'telefono' => '',
-                'correo' => ''
+                'apellido' => $request->apellido,
+                'telefono' => $request->telefono,
+                'correo' => $request->correo
                 
                
             ]
@@ -67,7 +67,7 @@ class ClienteController extends Controller
                 // return $cliente;
 
         return view('cliente.show',compact('cliente'));
-    }
+    }   
 
     /**
      * Show the form for editing the specified resource.
@@ -98,7 +98,11 @@ class ClienteController extends Controller
             'nombre'=>['required']
         ]);
         Cliente::find($request->id)->update([
-            'nombre' => $request->nombre
+            'dni' => $request->dni,
+            'nombre' => $request->nombre,
+            'apellido' => $request->apellido,
+            'telefono' => $request->telefono,
+            'correo' => $request->correo
         ]);
         
         return redirect()->route('clientes.index');

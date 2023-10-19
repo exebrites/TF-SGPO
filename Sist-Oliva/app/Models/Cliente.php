@@ -8,7 +8,7 @@ use App\Models\SistOliva;
 
 class Cliente extends Model
 {
-
+    protected $table = "clientes";
     protected $fillable = ['dni','nombre','apellido','telefono','correo'];
 /*----------------------------ATRIBUTOS----------------------------------------*/
   
@@ -26,9 +26,10 @@ class Cliente extends Model
     
     //SIN PROBAR 
 
-    public function pedido()
+    public function pedidos()
     {
-        return $this->belongsTo(Pedido::class);
+        //llamado al modelo, como es fk en tabla pedidos, como es pk
+        return $this->hasMany('\App\Models\Pedido','clientes_id','');
     }
 
     use HasFactory;

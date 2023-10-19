@@ -9,6 +9,7 @@ use App\Models\Producto;
 
 class Pedido extends Model
 {
+    protected $table="pedidos";
     protected $fillable = ['clientes_id', 'productos_id', 'fecha_inicio', 'fecha_entrega', 'estado', 'disenio_estado', 'cantidad','subtotal'];
   
     /*----------------------------ATRIBUTOS----------------------------------------*/
@@ -29,11 +30,13 @@ class Pedido extends Model
 
     public function productos()
     {
-        return $this->hasMany(Producto::class, 'producto_id');
+        return $this->hasMany(Producto::class);
     }
-    public function clientes()
+    public function cliente()
     {
-        return $this->hasMany(Cliente::class, 'cliente_id');
+        // llamo al modelo, fk en tabla pedidos, pk en tabla clientes
+        // como se llama pk de clientes en tabla pedidos
+        return $this->belongsTo('\App\Models\Cliente','clientes_id','id');
     }
 
     use HasFactory;

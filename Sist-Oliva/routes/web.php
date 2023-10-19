@@ -73,8 +73,8 @@ Route::resource('clientes',ClienteController::class);
 
 
 /*RUTAS DEL ABM PRODUCTO*/
-Route::resource('productos', ProductoController::class);
 Route::get('/productos{id}',[ProductoController::class,'detalle'])->name('producto.detalle');
+Route::resource('productos', ProductoController::class);
 
 
 

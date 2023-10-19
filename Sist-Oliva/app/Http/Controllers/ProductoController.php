@@ -41,24 +41,25 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-
+        /**
+         *  $request->file('file'): Este código asume que en el formulario de la solicitud HTTP 
+         * (por ejemplo, un formulario HTML) se ha enviado un archivo con el nombre "file". 
+         * $request es un objeto que representa la solicitud HTTP y file('file') obtiene el archivo enviado con ese nombre.
+         * ->store('public'): Después de obtener el archivo, se llama al método store('public'). 
+         * Esto almacena el archivo en la ubicación especificada en el sistema de archivos de Laravel.
+         * En este caso, los archivos se guardarán en el directorio "public" de la aplicación.
+         */
         $request->validate([
-            'name'=> ['required '],
-            'price'=> ['required '],
-            'description'=> ['required '],
-            'file'=> ['required ']
+            'name' => ['required '],
+            'price' => ['required '],
+            'description' => ['required '],
+            'file' => ['required ']
+
         ]);
 
         //validar los campos que ingresa
 
-/**
- *  $request->file('file'): Este código asume que en el formulario de la solicitud HTTP 
- * (por ejemplo, un formulario HTML) se ha enviado un archivo con el nombre "file". 
- * $request es un objeto que representa la solicitud HTTP y file('file') obtiene el archivo enviado con ese nombre.
- * ->store('public'): Después de obtener el archivo, se llama al método store('public'). 
- * Esto almacena el archivo en la ubicación especificada en el sistema de archivos de Laravel.
- * En este caso, los archivos se guardarán en el directorio "public" de la aplicación.
-*/
+
 
         $imagen =  $request->file('file')->store('public');
         $url = Storage::url($imagen);
@@ -70,12 +71,11 @@ class ProductoController extends Controller
                 'slug' => $request->name,
                 'description' => $request->description,
                 'category_id' => 1,
-                'image_path' => $url
+                'image_path' => $url,
+                'alias' => $request->alias
             ]
         );
 
-        //   return redirect()->route('productos.edit',['producto'=>$producto]);
-        // return view('producto.edit', ['producto' => $producto]);
         return redirect()->route('productos.index');
 
         //    return $request;
@@ -120,19 +120,29 @@ class ProductoController extends Controller
     public function update(Request $request, $id)
     {
 
-        /*URL no funciona*/
-        // $imagen =  $request->file('file')->store('public');
-        // if( $imagen == null){
-        //     $imagen="cosito";
-        // }
-        // $url = Storage::url($imagen);
 
-        $request->validate([
-            'name'=> ['required '],
-            'price'=> ['required '],
-            'description'=> ['required '],
-            'file'=> ['required ']
-        ]);
+        if ($request->file('file') == null) {
+
+            // sino $url toma el valor que tenia imagen_path cuando no se actualiza la foto
+            $p = Producto::find($request->id);
+            $url = $p->image_path;
+        } else {
+            // si actualiza debe pasar ...
+            $imagen =  $request->file('file')->store('public');
+            $url = Storage::url($imagen);
+        }
+
+
+
+
+
+        // // // $request->validate([
+        // // //     'name' => ['required '],
+        // // //     'price' => ['required '],
+        // // //     'description' => ['required '],
+        // // //     'file' => ['required '],
+
+        // // // ]);
 
         Producto::find($request->id)->update([
             'name' => $request->name,
@@ -140,11 +150,10 @@ class ProductoController extends Controller
             'slug' => $request->name,
             'description' => $request->description,
             'category_id' => 1,
-            'image_path' => "cosito"
-
+            'image_path' => $url,
+            'alias' => $request->alias
         ]);
 
-        // return $request;
         return redirect()->route('productos.index');
     }
 

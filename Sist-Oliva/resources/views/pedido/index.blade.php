@@ -11,7 +11,7 @@
 <div class="card">
     <div class="card-header">
         {{-- Agregar --}}
-        {{-- <a   href="{{route('pedidos.create')}}" class="btn btn-success" >Agregar nuevo producto</a> --}}
+        <a   href="{{route('pedidos.create')}}" class="btn btn-success" >Agregar nuevo producto</a>
     </div>
     <div class="card-body">
         <table class="table table-striped">
@@ -35,9 +35,12 @@
                    {{-- {{dd($item)}} --}}
                     <tr>
                         <td>{{$item->id}}</td>
-                        <td><a href="{{route('clientes.show',$item->clientes_id)}}">{{$item->clientes_id}}</a></td>
+                        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$item->id}}">
+                            Detalle de cliente
+                          </button></td>
                         {{-- <td><a href="{{route('productos.show',$item->productos_id)}}">{{$item->productos_id}}</a></td> --}}
-<td></td>
+                        {{-- {{dd($item->cliente->id)}} --}}
+                        <td>AA14x15</td>
                         <td>En proceso/Terminado</td>
                         <td>Si/No</td>
                         <td>{{$item->cantidad}}</td>
@@ -54,6 +57,35 @@
                         </td> --}}
                 
                     </tr>
+
+                    <!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  
+  <div class="modal fade" id="exampleModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h5>dni:{{$item->cliente->dni}}</h5>
+       <h5> nombre:{{$item->cliente->nombre}}</h5>
+          <h5>apellido:{{$item->cliente->apellido}}</h5>
+       <h5>telefono:{{$item->cliente->telefono}}</h5>
+          <h5>correo:{{$item->cliente->correo}}</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+        </div>
+      </div>
+    </div>
+  </div>
                   @endforeach
                
             </tbody>

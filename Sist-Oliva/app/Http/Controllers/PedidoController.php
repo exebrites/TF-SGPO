@@ -14,8 +14,8 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $pedidos=Pedido::all();
-       return view('pedido.index',['pedidos'=>$pedidos]);
+        $pedidos = Pedido::all();
+        return view('pedido.index', ['pedidos' => $pedidos]);
     }
 
     /**
@@ -59,7 +59,8 @@ class PedidoController extends Controller
     public function edit($id)
     {
         // return view('pedido.edit');
-        return 'editar el estado pedido y otros campos si fuese necesario';
+        $pedido = Pedido::find($id);
+        return view('pedido.edit',['pedido'=>$pedido]);
     }
 
     /**
@@ -72,6 +73,9 @@ class PedidoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        //   clientes_id', 'productos_id', 'fecha_inicio', 'fecha_entrega', 'estado', 'disenio_estado', 'cantidad','subtotal'];
+        return 'actualizar';
+
     }
 
     /**
