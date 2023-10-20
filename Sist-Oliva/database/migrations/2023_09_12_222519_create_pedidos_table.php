@@ -21,7 +21,7 @@ return new class extends Migration
             //productos_id
             $table->date('fecha_inicio');
             $table->date('fecha_entrega');
-            $table->boolean('estado');
+            $table->string('estado');
             $table->boolean('disenio_estado');
             $table->integer('cantidad');
             $table->float('subtotal');
