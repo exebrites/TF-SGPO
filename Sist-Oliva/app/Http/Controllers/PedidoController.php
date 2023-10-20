@@ -74,8 +74,12 @@ class PedidoController extends Controller
     {
         //
         //   clientes_id', 'productos_id', 'fecha_inicio', 'fecha_entrega', 'estado', 'disenio_estado', 'cantidad','subtotal'];
-        return 'actualizar';
-
+        $pedido=Pedido::find($id);
+        $pedido->update([
+            'estado'=>$request->estado,
+            'disenio_estado'=>$request->disenio
+        ]);
+        return redirect()->route('pedidos.index');
     }
 
     /**

@@ -5,7 +5,14 @@
 @section('content_header')
     <h1>Editar pedido</h1>
 @stop
+{{-- 
+        ***PENDIENTES***    
+    
+        ### Que valor tiene pedido ?
 
+        ###NO mandar "seleccionar" 
+        
+        --}}
 @section('content')
     <div class="card">
         {{-- {{ dd($pedido) }} --}}
@@ -13,24 +20,30 @@
             <form action="{{ route('pedidos.update', $pedido->id) }}" method="post">
                 @csrf
                 @method('PUT')
-                <div  class="form-group">
+                <div class="form-group" style="">
                     <label>Nro de pedido</label>
                     <input type="text" class="form-control" aria-describedby="textHelp" name=""
-                        value="{{ $pedido->id }}">
+                        value="{{ $pedido->id }}" readonly>
                 </div>
 
                 <div class="form-group">
-                    <label>Estado</label>
+                    <label>Estado : {{ $pedido->estado }}</label>
                     <br>
-                    <select id="myCombo">
-                        <option value="option1">Pendiente de pago</option>
-                        <option value="option2">Pago confirmado</option>
-                        <option value="option3">Proceso</option>
-                        <option value="option4">Diseño</option>
+                    {{-- valores que toma estado: pediente-pago,confirmado-pago,inicio,disenio
+                    //terminado,despachado,entregado espera --}}
+                    <select class="custom-select" id="myCombo" name="estado">
+                        {{-- <option selected>Seleccionar</option> --}}
 
-                        <option value="option5">Terminado</option>
-                        <option value="option6">Entregado</option>
-                        <option value="option7">En espera</option>
+                        <option value="pendiente-pago">Pendiente de pago</option>
+                        <option value="confirmado-pago">Pago confirmado</option>
+                        <option value="inicio">Inicio</option>
+                        <option value="disenio">Diseño</option>
+
+                        <option value="terminado">Terminado</option>
+                        <option value="despachado">Despachado</option>
+
+                        <option value="entregado">Entregado</option>
+                        <option value="espera">En espera</option>
 
 
 
@@ -39,11 +52,17 @@
 
 
                 <div class="form-group">
-                    <label>Diseño</label>
+                    <label>Diseño : {{ $pedido->disenio_estado }}</label>
                     <br>
-                    <select id="myCombo">
-                        <option value="option1">Si</option>
-                        <option value="option1">NO</option>
+                    {{-- valores que toma disenio_estado:TIENE, NO TIENE --}}
+
+
+
+                    <select class="custom-select" id="myCombo" name="disenio">
+                        {{-- <option selected>Seleccionar</option> --}}
+
+                        <option value="1">TIENE</option>
+                        <option value="0">NO TIENE</option>
 
 
                     </select>
@@ -53,7 +72,7 @@
                 <button type="submit" class="btn btn-primary">Actualizar</button>
             </form>
 
-            <a class="btn btn-danger" href="http://">Cancelar</a>
+            <a class="btn btn-danger" href="{{ route('pedidos.index') }}">Cancelar</a>
         </div>
     </div>
 @stop
