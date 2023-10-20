@@ -28,9 +28,9 @@ class Pedido extends Model
 
     //SIN PROBAR 
 
-    public function productos()
+    public function producto()
     {
-        return $this->hasMany(Producto::class);
+        return $this->belongsTo('\App\Models\Producto','productos_id','id');
     }
     public function cliente()
     {
