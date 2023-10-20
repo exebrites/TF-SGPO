@@ -8,6 +8,9 @@
 
 @section('content')
 <div class="card">
+
+  {{-- //   clientes_id', 'productos_id', 'fecha_inicio', 'fecha_entrega', 'estado', 'disenio_estado', 'cantidad','subtotal']; --}}
+
     <div class="card-body">
         <form action="{{route('pedidos.store')}}" method="post" enctype="multipart/form-data">
           @csrf

@@ -11,7 +11,7 @@
     <div class="card">
         <div class="card-header">
             {{-- Agregar --}}
-            <a href="{{ route('pedidos.create') }}" class="btn btn-success">Agregar nuevo producto</a>
+            <a href="{{ route('shop') }}" class="btn btn-success">Agregar nuevo pedido</a>
         </div>
         <div class="card-body">
             <table class="table table-striped">

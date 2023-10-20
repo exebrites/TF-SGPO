@@ -115,8 +115,8 @@ class CartController extends Controller
                 'productos_id' => $p->id,
                 'fecha_inicio' => '2000-02-01',
                 'fecha_entrega' => '2000-02-01',
-                'estado' => true,
-                'disenio_estado' => true,
+                'estado' => "pendiente-pago", //por defecto: pendiente-pago
+                'disenio_estado' => false, //por defecto: no tiene pedido = false
                 'cantidad' => $p->quantity,
                 'subtotal' => \Cart::getSubTotal()
 
