@@ -45,10 +45,10 @@
                                 {{ $item->producto->alias }}
 
                             </td>
-                            <td>{{$item->estado}}</td>
-                            
+                            <td>{{ $item->estado }}</td>
+
                             {{-- Condicional de dos opciones disenio_estado(0,1). Indicando si tiene o no un diseño --}}
-                            <td>{{($item->disenio_estado==1)?'TIENE':'NO TIENE';}}</td>
+                            <td>{{ $item->disenio_estado == 1 ? 'TIENE' : 'NO TIENE' }}</td>
                             <td>{{ $item->cantidad }}</td>
                             <td>{{ $item->subtotal }}</td>
                             <td width="10px"><a class="btn btn-primary btn btn-sm"

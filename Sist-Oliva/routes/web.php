@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutContorller;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\DisenioController;
 use App\Http\Controllers\fileController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\PedidoController;
@@ -46,8 +47,23 @@ Route::post('/prueba',[PruebaController::class,'imagen'])->name('prueba');
 
 /*FIN RUTAS DE PRUEBAS*/
 
-/**
- * RUTAS DE MAILS
+/** RUTAS DE DISEÑOS
+ * 
+*/
+// Route::post('/prueba',[PruebaController::class,'imagen'])->name('prueba');
+Route::resource('/disenios',DisenioController::class);
+
+
+/**FIN RUTAS DE DISEÑOS
+ * 
+*/
+
+
+
+
+
+/**RUTAS DE MAILS
+ * 
  * 
  * 
  * 
@@ -56,10 +72,10 @@ Route::post('/prueba',[PruebaController::class,'imagen'])->name('prueba');
 Route::get('/pago',[MailController::class,'pago'])->name('pago');
 Route::post('/comprobante',[MailController::class,'comprobante'])->name('comprobante');
 
-/**
+/**FIN RUTAS DE MAILS
  * 
  * 
- * FIN RUTAS DE MAILS
+ * 
 */
 
 /*RUTAS DEL ABM PEDIDOS*/

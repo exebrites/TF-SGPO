@@ -344,6 +344,11 @@ return [
         'text' => 'Gestionar Pedidos', 
         'route' => 'pedidos.index',
        ],
+       [
+        //'route'=> 'ruta'
+        'text' => 'Gestionar Diseños', 
+        'route' => 'disenios.index',
+       ],
       
     ],
 

@@ -5,22 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Producto;
+
 class Disenio extends Model
 {
+    protected $fillable = ['url'];
 
-/*----------------------------ATRIBUTOS----------------------------------------*/
-  
-
-/*----------------------------METODOS-----------------------------------------*/
+    /*----------------------------ATRIBUTOS----------------------------------------*/
 
 
-/*----------------------------RELACIONES----------------------------------------*/
+    /*----------------------------METODOS-----------------------------------------*/
+
+
+    /*----------------------------RELACIONES----------------------------------------*/
     /*AGREGAR ATRIBUTOS*/
 
     /*AGREGAR METODOS*/
 
     /*AGREGAR RELACIONES*/
-    public function producto(){
+    public function producto()
+    {
         return $this->belongsTo('App\Models\Producto');
     }
     use HasFactory;
