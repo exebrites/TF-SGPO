@@ -96,10 +96,11 @@ class DisenioController extends Controller
         $imagen =  $request->file('file')->store('public');
         //cambia el nombre de la imagen para poder subirla a una DB
         $url = Storage::url($imagen);
-        $disenio = Disenio::find($request->id);
+        $disenio = Disenio::find($id);
         $disenio->update([
             'url' => $url
         ]);
+        return redirect()->route('disenios.index'); 
     }
 
     /**

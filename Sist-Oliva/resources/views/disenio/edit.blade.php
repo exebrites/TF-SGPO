@@ -33,13 +33,22 @@
     <div class="row">
         <div class="car">
             <div class="card-boyd">
-                <form action="{{ route('disenios.update',$disenio) }}" method="post" class="dropzone" id="my-awesome-dropzone">
-                </form>
+                <form action="{{ route('disenios.update', $disenio,$disenio->id) }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
-                <a href="" data-dz-remove>Resubir diseño</a>
+                    <div class="form-group">
+                        <label>Seleccionar imagen</label>
+                        {{-- required --}}
+                        <input type="file" class="form-control-file" name="file" accept="image/*" required>
+                        {{-- @error('file')
                 <br>
-                <button class="btn btn-success" type="submit" id="start-upload-button">Actualizar diseño</button>
+                <small style="color:red">{{$message}}</small>
+            @enderror --}}
+                    </div>
 
+                    <button type="submit" class="btn btn-primary">Actualizar diseño</button>
+                </form>
 
 
             </div>
@@ -50,14 +59,13 @@
     {{-- Logica para manejar dropzone --}}
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 
-    <script>
+    {{-- <script>
         // Note that the name "myDropzone" is the camelized
         // id of the form.
         Dropzone.options.myAwesomeDropzone = {
             // Configuration options go here
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                "X-HTTP-Method-Override": "PUT"
             },
             dictDefacultMessage: "Arrastre una imagen al recuadro para subirlo",
             acceptedFiles: "image/*",
@@ -72,6 +80,6 @@
         document.getElementById("start-upload-button").addEventListener("click", function() {
             myDropzone.processQueue(); // Inicia el proceso de carga cuando se hace clic en el botón
         });
-    </script>
+    </script> --}}
     <script src="/js/app.js"></script>
 @stop
