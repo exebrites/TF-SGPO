@@ -23,7 +23,7 @@ class CheckoutContorller extends Controller
         // $p = Pedido::where('clientes_id', $cliente->id)->get();
         // $p=Pedido::find($id);
         // $estado = $p[0]->estado;
-        // return view('checkout', ['estado' => $estado]);
+        return view('checkout');
     }
 
     /**

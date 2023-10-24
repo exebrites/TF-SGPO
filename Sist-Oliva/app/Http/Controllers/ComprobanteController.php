@@ -16,10 +16,10 @@ class ComprobanteController extends Controller
     public function index()
     {
         //
-        $comprobantes=Comprobante::all();
-        return view('comprobante.index',['comprobantes'=>$comprobantes]);
+        $comprobantes = Comprobante::all();
+        return view('comprobante.index', ['comprobantes' => $comprobantes]);
         // return $comprobantes;
-        
+
     }
 
     /**
@@ -29,7 +29,6 @@ class ComprobanteController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -46,7 +45,7 @@ class ComprobanteController extends Controller
         Comprobante::create([
             'url_comprobantes' => $url,
         ]);
-        return $request;
+       return redirect()->route('checkout.index');
     }
 
     /**

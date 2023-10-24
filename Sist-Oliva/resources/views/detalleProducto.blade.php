@@ -18,7 +18,7 @@
     <br>
     <div class="row">
         {{-- {{dd($pro);}} --}}
-        <div class="col-4">
+        <div class="col">
             <div class="card" style="margin-bottom: 20px; height: auto;">
                 <img src="{{ $pro->image_path }}" class="card-img-top mx-auto"
                     style="height: 150px; width: 150px;display: block;" alt="{{ $pro->image_path }}">
@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <div class="col-8">
+        <div class="col">
             <div class="card" style="margin-bottom: 20px; height: auto;">
                 <div class="card-body">
                     <h3>En caso de tener un diseño propio subirlo aqui</h3>
@@ -67,7 +67,7 @@
                     <br>
                     <button type="submit" id="start-upload-button">Enviar </button>
                     <br>
-                    <input type="checkbox" name="miCheckbox" id="miCheckbox" >No tengo diseño
+                    <input type="checkbox" name="miCheckbox" id="miCheckbox">No tengo diseño
 
 
                 </div>
@@ -85,7 +85,7 @@
         // Obtén una referencia al checkbox
         const checkbox = document.getElementById('miCheckbox');
         const h3 = document.getElementById('h3');
-        checkbox.checked=false;
+        checkbox.checked = false;
 
         // Agrega un evento de escucha al checkbox
         checkbox.addEventListener('click', function() {
@@ -102,7 +102,7 @@
     </script>
 
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
- 
+
     <script>
         // Note that the name "myDropzone" is the camelized
         // id of the form.
@@ -110,9 +110,9 @@
             // Configuration options go here
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}",
-                'disenio_estado':"checkbox.checked"
+                'disenio_estado': "checkbox.checked"
             },
-            dictDefacultMessage:"Arrastre una imagen al recuadro para subirlo" ,
+            dictDefacultMessage: "Arrastre una imagen al recuadro para subirlo",
             acceptedFiles: "image/*",
             maxFilesize: 4, //en MB's
             maxFiles: 1,

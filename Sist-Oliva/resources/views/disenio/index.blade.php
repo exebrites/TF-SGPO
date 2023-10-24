@@ -19,12 +19,12 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
                 <thead>
                     <tr>
 
-                        <th>Nro de pedido</th>
+                        {{-- <th>Nro de pedido</th> --}}
                         <th>Nro de diseño</th>
-                         <th>Estado del diseño</th>
+                         {{-- <th>Estado del diseño</th> --}}
 
 
-                        <th>Alias del producto</th> 
+                        {{-- <th>Alias del producto</th>  --}}
                         <th>Ver diseño</th>
                         <th colspan="2"></th>
                     </tr>
@@ -34,7 +34,7 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
                 <tbody>
                     @foreach ($disenios as $item)
                         <tr>
-                            {{-- <td>{{ $item->pedido->id}}</td> --}}
+                            {{-- <td>{{ dd($item->pedidos->id)}}</td> --}}
                             <td>{{ $item->id }}</td>
                             {{-- <td>{{ $item->pedido->disenio_estado ? 'Tiene' : 'no tiene' }}</td> --}}
                             {{-- <td>{{$item->pedido->producto->alias }}</td> --}}
@@ -71,7 +71,9 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src="{{$item->url}}" alt="Imagen de diseño" srcset="">
+                                        <img src="{{ $item->url }}" alt="Imagen 1" class="img-fluid">
+
+                                        {{-- <img src="{{$item->url}}" alt="Imagen de diseño" srcset=""> --}}
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
