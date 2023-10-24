@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
+use App\Models\Cliente;
 use App\Models\Disenio;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
@@ -131,5 +132,16 @@ class PedidoController extends Controller
         return redirect()->route('shop')->with('success_msg', 'Su pedido se realizó con éxito!');
 
         // // 
+    }
+
+    public function pedidoCliente(){
+
+        $user = Auth::user()->id;
+        $cliente = Cliente::find($user);
+        //    dd($cliente);
+        $pedidos = Pedido::where('clientes_id', $cliente->id)->get();
+       
+       
+        return view('pedido.pedidoCliente',['pedidos'=>$pedidos]);
     }
 }

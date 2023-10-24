@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-{{$estado='pendiente-pago'}}
+{{-- {{$estado='pendiente-pago'}} --}}
     <div class="card">
         <div class="card-body">
             <br>
@@ -9,8 +9,9 @@
 
 
             <div class="container">
-
+                <h5>Tus estado de pedido es el siguiente : {{$estado}}</h3>
                 <div class="row">
+                   
                   @if ($estado=='pendiente-pago')
                     <div class="col">
                         <div class="card">

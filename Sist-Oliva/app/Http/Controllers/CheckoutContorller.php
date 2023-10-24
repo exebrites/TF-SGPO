@@ -16,12 +16,14 @@ class CheckoutContorller extends Controller
      */
     public function index()
     {
-        $user = Auth::user()->id;
-        $cliente = Cliente::find($user);
-        //    dd($cliente);
-        $p = Pedido::where('clientes_id', $cliente->id)->get();
-        $estado = $p[0]->estado;
-        return view('checkout', ['estado' => $estado]);
+
+        // $user = Auth::user()->id;
+        // $cliente = Cliente::find($user);
+        // //    dd($cliente);
+        // $p = Pedido::where('clientes_id', $cliente->id)->get();
+        // $p=Pedido::find($id);
+        // $estado = $p[0]->estado;
+        // return view('checkout', ['estado' => $estado]);
     }
 
     /**
@@ -53,7 +55,11 @@ class CheckoutContorller extends Controller
      */
     public function show($id)
     {
-        //
+
+        $p = Pedido::find($id);
+        //    dd($p->estado);
+        $estado = $p->estado;
+        return view('checkout', ['estado' => $estado]);
     }
 
     /**

@@ -87,6 +87,7 @@ Route::resource('/comprobantes',ComprobanteController::class);
 /*RUTAS DEL ABM PEDIDOS*/
 Route::resource('pedidos', PedidoController::class);
 Route::get('/procesar', [PedidoController::class, 'procesarPedido'])->name('procesarPedido.procesar');
+Route::get('/pedidoCliente',[PedidoController::class,'pedidoCliente'])->name('pedidoCliente');
 
 
 /*RUTAS DEL ABM CLIENTE*/
@@ -104,6 +105,8 @@ Route::resource('productos', ProductoController::class);
 
 /*RUTAS DEL CHECKOUT*/
 Route::get('/checkout', [CheckoutContorller::class, 'index'])->middleware(['auth', 'verified'])->name('checkout.index');
+Route::get('/checkout{id}', [CheckoutContorller::class, 'show'])->middleware(['auth', 'verified'])->name('checkout.show');
+
 
 
 
