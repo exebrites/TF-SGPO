@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('disenios', function (Blueprint $table) {
             $table->id();
             $table->string('url');
+            $table->boolean('disenio_estado');
             // $table->unsignedBigInteger('pedidos_id')->unique();
+
             // $table->foreign('pedidos_id')->references('id')->on('pedidos')->onDelete('cascade');
-            // //FALTA RELACIONAR
+            // // //FALTA RELACIONAR
 
             // $table->unsignedBigInteger('idProducto')->unique();
             // $table->foreign('idProducto')->references('id')->on('productos')->onDelete('cascade');

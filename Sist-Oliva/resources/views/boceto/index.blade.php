@@ -3,64 +3,59 @@
 @section('title')
 
 @section('content_header')
-    <h1>Listado de Diseños</h1>
+    <h1>Listado de bocetos</h1>
 @stop
 
 @section('content')
-    {{-- {{dd($disenios)}}
-    {{dd($pedidos)}} --}}
-    <a class="btn btn-success" href="{{ route('disenios.create') }}">Subir un nuevo diseño</a>
 
-    {{-- //listado de Diseños
-Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
     <div class="card">
         <div class="card-body">
             <table class="table table-striped">
                 <thead>
                     <tr>
 
-                        <th>Nro de pedido</th>
-                        <th>Nro de diseño</th>
-                         <th>Estado del diseño</th>
+                        <th>Nro de boceto</th>
+                        {{-- <th>Nro de diseño</th> --}}
+                        <th>Detalles</th>
 
-
+                        {{-- 
                         <th>Alias del producto</th> 
-                        <th>Ver diseño</th>
+                        <th>Ver diseño</th> --}}
                         <th colspan="2"></th>
                     </tr>
 
                 </thead>
 
                 <tbody>
-                    @foreach ($disenios as $item)
+                    @foreach ($bocetos as $item)
                         <tr>
                             {{-- <td>{{ $item->pedido->id}}</td> --}}
                             <td>{{ $item->id }}</td>
                             {{-- <td>{{ $item->pedido->disenio_estado ? 'Tiene' : 'no tiene' }}</td> --}}
                             {{-- <td>{{$item->pedido->producto->alias }}</td> --}}
-                            <td><a data-toggle="modal" data-target="#exampleModal{{$item->id}}">
-                                    Imagen
+                            <td><a data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
+                                    Ver mas
                                 </a></td>
 
-                                {{-- display none cuando haga el primer click --}}
-                            
+                            {{-- display none cuando haga el primer click --}}
 
 
 
-                            <td width="10px"><a class="btn btn-primary btn btn-sm"
+
+                            {{-- <td width="10px"><a class="btn btn-primary btn btn-sm"
                                     href="{{ route('disenios.edit', $item->id) }}">Editar</a>
-                            </td>
-                            <td width="10px">
+                            </td>--}}
+                            {{-- <td width="10px">
                                 <form action="{{route('disenios.destroy',$item->id)}}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button  class="btn btn-danger btn btn-sm" type="submit">borrar</button>
                                 </form>
-                            </td>
+                            </td>  --}}
                         </tr>
 
 
-                        <div class="modal fade" id="exampleModal{{$item->id}}" tabindex="-1"
+                        <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -71,10 +66,28 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src="{{$item->url}}" alt="Imagen de diseño" srcset="">
+                                        
+
+                                        <div class="row">
+                                            <p>Negocio:{{ $item->negocio }}<br>
+                                                Objetivo: {{ $item->objetivo }}<br>
+                                                Publico: {{ $item->publico }}<br>
+                                                Contenido: {{ $item->contenido }}<br></p>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <img src="{{ $item->url_logo }}" alt="Imagen 1" class="img-fluid">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <img src="{{ $item->url_img }}" alt="Imagen 2" class="img-fluid">
+                                            </div>
+                                        </div>
+
+
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cerrar</button>
                                         {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
                                     </div>
                                 </div>
@@ -84,7 +97,7 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
 
 
 
-                   
+
                 </tbody>
             </table>
         </div>

@@ -10,7 +10,7 @@ use App\Models\Producto;
 class Pedido extends Model
 {
     protected $table="pedidos";
-    protected $fillable = ['clientes_id', 'productos_id', 'fecha_inicio', 'fecha_entrega', 'estado', 'disenio_estado', 'cantidad','subtotal'];
+    protected $fillable = ['clientes_id', 'productos_id', 'disenios_id','fecha_inicio', 'fecha_entrega', 'estado', 'disenio_estado', 'cantidad','subtotal'];
   
     /*----------------------------ATRIBUTOS----------------------------------------*/
 
@@ -39,5 +39,8 @@ class Pedido extends Model
         return $this->belongsTo('\App\Models\Cliente','clientes_id','id');
     }
 
+    public function disenio(){
+        return $this->belongsTo('\App\Models\Disenio','disenios_id','id');
+    }
     use HasFactory;
 }

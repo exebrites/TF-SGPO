@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Darryldecode\Cart\Cart;
 use App\Models\Pedido;
+use App\Models\Disenio;
+use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -99,9 +100,12 @@ class PedidoController extends Controller
 
     public function procesarPedido(Request $request)
     {
-        // nunca va procesar pedido con un carrito en blanco 
 
+
+        // nunca va procesar pedido con un carrito en blanco 
+        $ultimoId = Disenio::max('id');
         //    return \Cart::getSubTotal();
+        $disenio_estado = Disenio::where('id',  $ultimoId)->value('disenio_estado');
 
         //    'clientes_id','productos_id','fecha_inicio','fecha_entrega','estado','disenio_estado'];
 
@@ -109,13 +113,14 @@ class PedidoController extends Controller
         $producto = \Cart::getContent();
         //   dd($producto);
         foreach ($producto as $p) {
-         Pedido::create([
+            Pedido::create([
                 'clientes_id' => Auth::user()->id,
                 'productos_id' => $p->id,
+                'disenios_id' =>   $ultimoId,
                 'fecha_inicio' => '2000-02-01',
                 'fecha_entrega' => '2000-02-01',
                 'estado' => "pendiente-pago", //por defecto: pendiente-pago
-                'disenio_estado' => false, //por defecto: no tiene pedido = false
+                'disenio_estado' =>   $disenio_estado, //por defecto: no tiene pedido = false
                 'cantidad' => $p->quantity,
                 'subtotal' => \Cart::getSubTotal()
 

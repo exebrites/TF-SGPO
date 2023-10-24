@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\BocetoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutContorller;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ComprobanteController;
 use App\Http\Controllers\DisenioController;
 use App\Http\Controllers\fileController;
 use App\Http\Controllers\MailController;
@@ -16,6 +18,7 @@ use App\Models\Producto;
 use Illuminate\Routing\RouteRegistrar;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\prueba;
+use GuzzleHttp\Psr7\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,34 +32,35 @@ use App\Mail\prueba;
 */
 
 
+Route::resource('/bocetos',BocetoController::class);
 
-Route::get('/boceto',function(){
-    return view('boceto');
-})->name('boceto');
 
-/*RUTAS DE PRUEBAS*/
-Route::get('/email',function(){
+Route::get('/email', function () {
 
     Mail::to('exequiel@gmail.com')->send(new prueba);
     return 'mensaje enviado';
 });
 
-Route::get('/prueba',[PruebaController::class,'index'])->name('prueba.index');
-Route::post('/prueba',[PruebaController::class,'imagen'])->name('prueba');
+/*RUTAS DE PRUEBAS*/
+
+
+Route::get('/prueba', [PruebaController::class, 'index'])->name('prueba.index');
 
 
 /*FIN RUTAS DE PRUEBAS*/
 
 /** RUTAS DE DISEÑOS
  * 
-*/
+ */
 // Route::post('/prueba',[PruebaController::class,'imagen'])->name('prueba');
-Route::resource('/disenios',DisenioController::class);
+Route::resource('/disenios', DisenioController::class);
+// Route::post('/disenios', [PruebaController::class, 'imagen'])->name('');
+
 
 
 /**FIN RUTAS DE DISEÑOS
  * 
-*/
+ */
 
 
 
@@ -68,29 +72,31 @@ Route::resource('/disenios',DisenioController::class);
  * 
  * 
  * 
-*/
-Route::get('/pago',[MailController::class,'pago'])->name('pago');
-Route::post('/comprobante',[MailController::class,'comprobante'])->name('comprobante');
+ */
+Route::get('/pago', [MailController::class, 'pago'])->name('pago');
+Route::post('/comprobante', [MailController::class, 'comprobante'])->name('comprobante');
 
+
+Route::resource('/comprobantes',ComprobanteController::class);
 /**FIN RUTAS DE MAILS
  * 
  * 
  * 
-*/
+ */
 
 /*RUTAS DEL ABM PEDIDOS*/
-Route::resource('pedidos',PedidoController::class);
-Route::get('/procesar',[PedidoController::class,'procesarPedido'])->name('procesarPedido.procesar');
+Route::resource('pedidos', PedidoController::class);
+Route::get('/procesar', [PedidoController::class, 'procesarPedido'])->name('procesarPedido.procesar');
 
 
 /*RUTAS DEL ABM CLIENTE*/
-Route::resource('clientes',ClienteController::class);
+Route::resource('clientes', ClienteController::class);
 
 
 
 
 /*RUTAS DEL ABM PRODUCTO*/
-Route::get('/productos{id}',[ProductoController::class,'detalle'])->name('producto.detalle');
+Route::get('/productos{id}', [ProductoController::class, 'detalle'])->name('producto.detalle');
 Route::resource('productos', ProductoController::class);
 
 

@@ -44,10 +44,16 @@ class DisenioController extends Controller
         // recepciona una image y la almace en una carpeta
         $imagen =  $request->file('file')->store('public');
         //cambia el nombre de la imagen para poder subirla a una DB
+        $estado=$request->filled('miCheckbox');
         $url = Storage::url($imagen);
         Disenio::create([
-            'url' => $url
+            'url' => $url,
+            'disenio_estado' => !$estado
         ]);
+        // Reemplaza 'TuModelo' con el nombre de tu modelo
+
+
+
         // return 'diseño dado de alta';
 
         // $nombre = $request->file('file')->getClientOriginalName();
@@ -100,7 +106,7 @@ class DisenioController extends Controller
         $disenio->update([
             'url' => $url
         ]);
-        return redirect()->route('disenios.index'); 
+        return redirect()->route('disenios.index');
     }
 
     /**
@@ -116,5 +122,13 @@ class DisenioController extends Controller
         $disenio = Disenio::find($id);
         $disenio->delete();
         return redirect()->route('disenios.index');
+    }
+
+    function imagen(Request $request)
+    {
+        //recepciona una image y la almace en una carpeta
+        $imagen =  $request->file('file')->store('public');
+        //cambia el nombre de la imagen para poder subirla a una DB
+        $url = Storage::url($imagen);
     }
 }

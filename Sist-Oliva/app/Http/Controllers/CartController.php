@@ -77,6 +77,7 @@ class CartController extends Controller
         ));
 
         return redirect()->route('cart.index')->with('success_msg', 'Producto agregado a su Carrito!');
+       
     }
 
     public function update(Request $request)

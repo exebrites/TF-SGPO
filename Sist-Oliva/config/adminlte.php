@@ -349,6 +349,17 @@ return [
         'text' => 'Gestionar Diseños', 
         'route' => 'disenios.index',
        ],
+       [
+        //'route'=> 'ruta'
+        'text' => 'Bocetos', 
+        'route' => 'bocetos.index',
+       ],
+       [
+        //'route'=> 'ruta'
+        'text' => 'Comprobantes', 
+        'route' => 'comprobantes.index',
+       ],
+      
       
     ],
 

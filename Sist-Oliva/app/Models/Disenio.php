@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Producto;
+use App\Models\Pedido;
 
 class Disenio extends Model
 {
-    protected $fillable = ['url'];
+    protected $table = 'disenios';
+
+    protected $fillable = ['url','disenio_estado'];
 
     /*----------------------------ATRIBUTOS----------------------------------------*/
 
@@ -22,9 +25,12 @@ class Disenio extends Model
     /*AGREGAR METODOS*/
 
     /*AGREGAR RELACIONES*/
-    public function producto()
-    {
-        return $this->belongsTo('App\Models\Producto');
+    // public function producto()
+    // {
+    //     return $this->belongsTo('App\Models\Producto');
+    // }
+    public function pedido(){
+        return $this->hasOne('App\Models\Pedido','disenios_id','');
     }
     use HasFactory;
 }

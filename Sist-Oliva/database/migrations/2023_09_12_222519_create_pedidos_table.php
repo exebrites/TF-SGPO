@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('clientes_id');
             $table->unsignedBigInteger('productos_id');
-
+            $table->unsignedBigInteger('disenios_id');
             //clientes_id
             //productos_id
             $table->date('fecha_inicio');
@@ -29,6 +29,8 @@ return new class extends Migration
 
             $table->foreign('clientes_id')->references('id')->on('clientes')->onDelete('cascade');
             $table->foreign('productos_id')->references('id')->on('productos')->onDelete('cascade');
+            $table->foreign('disenios_id')->references('id')->on('disenios')->onDelete('cascade');
+
 
 
             $table->timestamps();

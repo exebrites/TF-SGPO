@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cliente;
-use App\Models\Pedido;
+use App\Models\Comprobante;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
-class CheckoutContorller extends Controller
+class ComprobanteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +15,11 @@ class CheckoutContorller extends Controller
      */
     public function index()
     {
-        $user = Auth::user()->id;
-        $cliente = Cliente::find($user);
-        //    dd($cliente);
-        $p = Pedido::where('clientes_id', $cliente->id)->get();
-        $estado = $p[0]->estado;
-        return view('checkout', ['estado' => $estado]);
+        //
+        $comprobantes=Comprobante::all();
+        return view('comprobante.index',['comprobantes'=>$comprobantes]);
+        // return $comprobantes;
+        
     }
 
     /**
@@ -31,7 +29,7 @@ class CheckoutContorller extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -42,7 +40,13 @@ class CheckoutContorller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $imagen =  $request->file('comprobante')->store('public');
+        //cambia el nombre de la imagen para poder subirla a una DB
+        $url = Storage::url($imagen);
+        Comprobante::create([
+            'url_comprobantes' => $url,
+        ]);
+        return $request;
     }
 
     /**
