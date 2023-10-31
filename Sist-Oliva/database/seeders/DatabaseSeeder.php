@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+
+        //para ejecutar todos los seeders 
+        //php artisan db:seed
         $this->call(ProductoSeeder::class);
     }
 }

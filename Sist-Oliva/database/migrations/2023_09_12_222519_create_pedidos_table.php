@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('clientes_id');
-            $table->unsignedBigInteger('productos_id');
+            // $table->unsignedBigInteger('productos_id');
             $table->unsignedBigInteger('disenios_id');
             // $table->unsignedBigInteger('entrega_id')->unique();
             //clientes_id
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->float('subtotal')->nullable();
 
             $table->foreign('clientes_id')->references('id')->on('clientes')->onDelete('cascade');
-            $table->foreign('productos_id')->references('id')->on('productos')->onDelete('cascade');
+            // $table->foreign('productos_id')->references('id')->on('productos')->onDelete('cascade');
             $table->foreign('disenios_id')->references('id')->on('disenios')->onDelete('cascade');
             // $table->foreign('entrega_id')->references('id')->on('disenios')->onDelete('cascade');
 

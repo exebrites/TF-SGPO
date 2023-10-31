@@ -18,6 +18,9 @@ return new class extends Migration
                
      
                 $table->id();
+                //crear una FK y la asocia con su tabla 
+                // $table->foreignId('pedido_id')->constrained('pedidos');
+
                 $table->string('name');
                 $table->string('slug')->unique();
                 
