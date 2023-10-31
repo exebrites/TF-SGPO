@@ -40,12 +40,14 @@ class ComprobanteController extends Controller
     public function store(Request $request)
     {
         $imagen =  $request->file('comprobante')->store('public');
+        $estado= $request->estado;
         //cambia el nombre de la imagen para poder subirla a una DB
         $url = Storage::url($imagen);
         Comprobante::create([
             'url_comprobantes' => $url,
         ]);
-       return redirect()->route('checkout.index');
+           return redirect()->route('shop')->with('success_msg','Su comprobante ha sido subido espere a que se confirme el pago!');
+        // return $request;
     }
 
     /**

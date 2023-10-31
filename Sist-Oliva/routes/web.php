@@ -8,6 +8,7 @@ use App\Http\Controllers\CheckoutContorller;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ComprobanteController;
 use App\Http\Controllers\DisenioController;
+use App\Http\Controllers\EntregaController;
 use App\Http\Controllers\fileController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\PedidoController;
@@ -32,23 +33,61 @@ use GuzzleHttp\Psr7\Request;
 */
 
 
-Route::resource('/bocetos',BocetoController::class);
 
+/*RUTAS DE PRUEBAS*/
+
+
+Route::get('/prueba', function () {
+
+    // $p = Producto::find(1);
+    // $quantity = 1;
+    
+    // \Cart::add(array(
+    //     'id' => $p->id,
+    //     'name' => $p->name,
+    //     'price' => $p->price,
+    //     'quantity' => $quantity,
+    //     'attributes' => array(
+    //         'imagen_path' => $p->img,
+    //         'slug' => $p->slug
+    //     )
+    // ));
+
+    $c = \Cart::getContent();
+
+
+    return view('prueba', ['c' => $c]);
+})->name('prueba.index');
+
+
+/*FIN RUTAS DE PRUEBAS*/
+
+
+
+
+
+
+
+
+
+
+
+//RUTAS ENTREGA
+Route::resource('entrega',EntregaController::class);
+
+
+//RUTA BOCETO
+Route::resource('/bocetos', BocetoController::class);
+
+
+
+//RUTA CORREO
 
 Route::get('/email', function () {
 
     Mail::to('exequiel@gmail.com')->send(new prueba);
     return 'mensaje enviado';
 });
-
-/*RUTAS DE PRUEBAS*/
-
-
-Route::get('/prueba', [PruebaController::class, 'index'])->name('prueba.index');
-
-
-/*FIN RUTAS DE PRUEBAS*/
-
 /** RUTAS DE DISEÑOS
  * 
  */
@@ -77,7 +116,7 @@ Route::get('/pago', [MailController::class, 'pago'])->name('pago');
 Route::post('/comprobante', [MailController::class, 'comprobante'])->name('comprobante');
 
 
-Route::resource('/comprobantes',ComprobanteController::class);
+Route::resource('/comprobantes', ComprobanteController::class);
 /**FIN RUTAS DE MAILS
  * 
  * 
@@ -86,8 +125,8 @@ Route::resource('/comprobantes',ComprobanteController::class);
 
 /*RUTAS DEL ABM PEDIDOS*/
 Route::resource('pedidos', PedidoController::class);
-Route::get('/procesar', [PedidoController::class, 'procesarPedido'])->name('procesarPedido.procesar');
-Route::get('/pedidoCliente',[PedidoController::class,'pedidoCliente'])->name('pedidoCliente');
+Route::get('/procesar', [PedidoController::class, 'procesarPedido'])->name('procesarPedido.procesar')->middleware(['auth', 'verified']);
+Route::get('/pedidoCliente', [PedidoController::class, 'pedidoCliente'])->name('pedidoCliente');
 
 
 /*RUTAS DEL ABM CLIENTE*/

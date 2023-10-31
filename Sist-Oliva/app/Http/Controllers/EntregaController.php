@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cliente;
+use App\Models\Entrega;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class CheckoutContorller extends Controller
+class EntregaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,19 +15,7 @@ class CheckoutContorller extends Controller
      */
     public function index()
     {
-
-        $user = Auth::user()->id;
-        $cliente = Cliente::find($user);
-        // //    dd($cliente);
-        // $p = Pedido::where('clientes_id', $cliente->id)->get();
-        // dd($p);
-        // el ultimo pedido que se genera es el que se toma cuando se finaliza la compra
-        $id = Pedido::max('id');
-    
-        // $p[0]->estado;
-        $estado =  Pedido::where('id', $id)->value('estado');
-        return view('checkout',['estado'=> $estado,'id'=>$id]);
-
+        //
     }
 
     /**
@@ -38,7 +25,6 @@ class CheckoutContorller extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -49,7 +35,29 @@ class CheckoutContorller extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // table entrega {
+        //     id integer [PK]
+        //     direccion string
+        //     telefono char
+        //     recepcion string
+        //     nota string
+        //     local boolean
+        //   }
+         $id= $request->id;   
+        Entrega::create([
+            'pedido_id' => $id,
+            'direccion' => $request->direccion,
+            'telefono' => $request->telefono,
+            'recepcion' => $request->nombre,
+            'nota' => $request->nota,
+            'local' => true,
+        ]);
+        $estado = $request->estado;
+        $p=Pedido::find($id);
+        $p->update(['estado'=>"inicio"]);
+
+        return redirect()->route('shop')->with('success_msg','Su pedido ha sido completado con exito! Puede ver el estado de avance en "Tus pedidos"');;
     }
 
     /**
@@ -60,12 +68,7 @@ class CheckoutContorller extends Controller
      */
     public function show($id)
     {
-
-        $p = Pedido::find($id);
-        //    dd($p->estado);
-        $estado = 'pendiente-pago';
-        $estado = $p->estado;
-        return view('checkout', ['estado' => $estado,'id'=>$id]);
+        //
     }
 
     /**

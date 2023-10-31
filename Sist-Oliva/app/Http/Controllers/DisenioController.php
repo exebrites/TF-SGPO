@@ -63,6 +63,10 @@ class DisenioController extends Controller
         //     $constraint->aspectRatio();
         // })
         // ->save($ruta);
+
+
+
+        
     }
 
     /**

@@ -102,34 +102,34 @@ class PedidoController extends Controller
     public function procesarPedido(Request $request)
     {
 
+        // return $request;
 
         // nunca va procesar pedido con un carrito en blanco 
-        $ultimoId = Disenio::max('id');
-        //    return \Cart::getSubTotal();
-        $disenio_estado = Disenio::where('id',  $ultimoId)->value('disenio_estado');
+        // $ultimoId = Disenio::max('id');
+        // //    return \Cart::getSubTotal();
+        // $disenio_estado = Disenio::where('id',  $ultimoId)->value('disenio_estado');
 
         //    'clientes_id','productos_id','fecha_inicio','fecha_entrega','estado','disenio_estado'];
 
         //\Cart::getContent() que retorna?
         $producto = \Cart::getContent();
-        //   dd($producto);
+      
         foreach ($producto as $p) {
             Pedido::create([
                 'clientes_id' => Auth::user()->id,
                 'productos_id' => $p->id,
-                'disenios_id' =>   $ultimoId,
-                'fecha_inicio' => '2000-02-01',
-                'fecha_entrega' => '2000-02-01',
+                'disenios_id' =>  1,
+                'fecha_inicio' => null,
+                'fecha_entrega' => null,
                 'estado' => "pendiente-pago", //por defecto: pendiente-pago
-                'disenio_estado' =>   $disenio_estado, //por defecto: no tiene pedido = false
-                'cantidad' => $p->quantity,
-                'subtotal' => \Cart::getSubTotal()
+                'disenio_estado' =>   null, //por defecto: no tiene pedido = false
+                'cantidad' => null,//$p->quantity,
+                'subtotal' => null//\Cart::getSubTotal()
 
             ]);
         }
-
         \Cart::clear();
-        return redirect()->route('shop')->with('success_msg', 'Su pedido se realizó con éxito!');
+        return redirect()->route('checkout.index')->with('success_msg', 'Su pedido se realizó con éxito!');
 
         // // 
     }

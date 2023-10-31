@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Producto;
-use App\Models\Pedido;
 use App\Models\User;
+use App\Models\Pedido;
+use App\Models\Producto;
 use Darryldecode\Cart\Cart;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CartController extends Controller
 {
@@ -32,39 +33,11 @@ class CartController extends Controller
 
     public function add(Request $request)
     {
-        /**
-         * 
-
- FUNCIONAMIENTO DE PRUEBA
-         */
-        // $Producto = Producto::find(2); // assuming you have a Product model with id, name, description & price
-        // //$rowId = 456; // generate a unique() row ID
-        // $userID = 1;  //the user ID to bind the cart contents
-
-        // /**  
-        //  * ¿Como recupero el usuario que actual? 
-        //  * 
-        //  * */
-        // $userID = auth()->user()->id;
-        // // add the product to cart
-        // \Cart::session($userID)->add(array(
-        //     'id' => $Producto->id,
-        //     'name' => $Producto->name,
-        //     'price' => $Producto->price,
-        //     'quantity' => 4,
-        //     'attributes' => array(
-        //         'imagen_path' => $Producto->img,
-        //         'slug' => $Producto->slug
-        //     ),
-        //     'associatedModel' => $Producto
-        // ));
+        
+        $imagen =  $request->file('file')->store('public');
+        $url_disenio = Storage::url($imagen);
 
 
-        /**
-         * 
-
- FUNCIONAMIENTO CORRECTO
-         */
         \Cart::add(array(
             'id' => $request->id,
             'name' => $request->name,
@@ -72,12 +45,14 @@ class CartController extends Controller
             'quantity' => $request->quantity,
             'attributes' => array(
                 'imagen_path' => $request->img,
-                'slug' => $request->slug
+                'slug' => $request->slug,
+                'url_disenio' => $url_disenio,
+                'estado_disenio'=> true
             )
         ));
 
         return redirect()->route('cart.index')->with('success_msg', 'Producto agregado a su Carrito!');
-       
+        // return     $url_disenio;
     }
 
     public function update(Request $request)
@@ -99,5 +74,4 @@ class CartController extends Controller
         \Cart::clear();
         return redirect()->route('cart.index')->with('success_msg', 'Carrito borrado!');
     }
-
 }

@@ -25,6 +25,10 @@ class BocetoController extends Controller
         // $disenio->update(['disenio_estado' => true]);
 
 
+
+
+        // CREAR UN DISEÑO -> Cuando no se suba un diseño
+
         // ---------------------------------
         $img_logo =  $request->file('logo')->store('public');
         $url_logo = Storage::url($img_logo);

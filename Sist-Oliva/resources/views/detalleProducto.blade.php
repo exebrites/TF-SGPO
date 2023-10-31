@@ -37,6 +37,8 @@
                         <input type="hidden" value="{{ $pro->image_path }}" id="img" name="img">
                         <input type="hidden" value="{{ $pro->slug }}" id="slug" name="slug">
                         <input type="hidden" value="1" id="quantity" name="quantity">
+                        <input type="file" name="file" id="">
+                        
                         <div class="form-group">
 
 
@@ -52,32 +54,35 @@
             </div>
         </div>
 
-        <div class="col">
+        {{-- <div class="col">
             <div class="card" style="margin-bottom: 20px; height: auto;">
-                <div class="card-body">
+                <div class="card-body" id="body-dropzone">
                     <h3>En caso de tener un diseño propio subirlo aqui</h3>
-                    {{-- dropzone --}}
+                    dropzone
 
-                    {{-- default: name=file --}}
+                    default: name=file
                     <form action="{{ route('disenios.store') }}" method="post" class="dropzone" id="my-awesome-dropzone">
-                        {{-- <input type="checkbox" name="miCheckbox" id="miCheckbox" style="display: none" > --}}
+                        <input type="checkbox" name="miCheckbox" id="miCheckbox" style="display: none" >
                     </form>
 
                     <a href="" data-dz-remove>Resubir imagen</a>
                     <br>
                     <button type="submit" id="start-upload-button">Enviar </button>
                     <br>
-                    <input type="checkbox" name="miCheckbox" id="miCheckbox">No tengo diseño
 
 
                 </div>
+                <div class="card-body"> <input type="checkbox" name="miCheckbox" id="miCheckbox">No tengo diseño </input>
+                </div>
+
+                Cuando crea un boceto, se crea un diseño que tiene que carga un diseño 
                 <h3 id="h3" style="display: none">No tienes un diseño propio? Hace click aquí <a
                         href="{{ Route('bocetos.create') }}" class="btn btn-primary">Hacer un Boceto</a></h3>
             </div>
 
         </div>
 
-    </div>
+    </div> --}}
 
 
     {{-- Archivos js  --}}
@@ -85,6 +90,7 @@
         // Obtén una referencia al checkbox
         const checkbox = document.getElementById('miCheckbox');
         const h3 = document.getElementById('h3');
+        const dropzone= document.getElementById('body-dropzone');
         checkbox.checked = false;
 
         // Agrega un evento de escucha al checkbox
@@ -92,11 +98,13 @@
             // Verifica si el checkbox está marcado
             if (checkbox.checked) {
                 h3.style.display = "block"
+                dropzone.style.display = "none"
                 // Redirige a la página deseada
                 // window.location.href =
                 //     '/boceto'; // Reemplaza 'https://www.ejemplo.com' con la URL a la que deseas redirigir.
             } else {
                 h3.style.display = "none"
+                dropzone.style.display = "block"
             }
         });
     </script>
