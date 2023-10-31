@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class MailController extends Controller
 {
-    function pago(){
+    function pago(Request $request){
+        $estado=$request->estado;
         Mail::to('exequiel@gmail.com')->send(new PagoMailable);
-        return view('checkout');
+        return view('checkout',['estado'=>$estado]);
         // return view('emails.Pago');
     }
     function comprobante(Request $request){

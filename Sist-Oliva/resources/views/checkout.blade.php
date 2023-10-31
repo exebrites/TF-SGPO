@@ -26,6 +26,7 @@
 
                         @switch($estado)
                             @case('pendiente-pago')
+                                {{-- {{dd($estado)}} --}}
                                 <div class="col">
                                     <div class="card">
                                         <div class="card-body">
@@ -59,6 +60,7 @@
                             @break
 
                             @case('confirmado-pago')
+                                {{-- {{dd($estado)}} --}}
                                 <div class="col">
                                     <div class="card">
                                         <div class="card-body">
@@ -138,7 +140,7 @@
                             @break
 
                             @default
-                            
+                                {{-- {{ dd($estado) }} --}}
                         @endswitch
 
 
@@ -157,7 +159,7 @@
             {{-- <a href="#" class="btn btn-success">Realizar pedido</a> --}}
 
 
-            <a href="{{route('shop')}} " class="btn btn-danger">Cancelar</a>
+            <a href="{{ route('shop') }} " class="btn btn-danger">Cancelar</a>
 
         </div>
 

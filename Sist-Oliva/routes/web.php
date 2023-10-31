@@ -83,11 +83,7 @@ Route::resource('/bocetos', BocetoController::class);
 
 //RUTA CORREO
 
-Route::get('/email', function () {
 
-    Mail::to('exequiel@gmail.com')->send(new prueba);
-    return 'mensaje enviado';
-});
 /** RUTAS DE DISEÑOS
  * 
  */
