@@ -32,7 +32,7 @@
                 <tbody>
 
                     @foreach ($pedidos as $item)
-                        {{-- {{dd($item)}} --}}
+                    @foreach ($item->detallePedido as $detalle)
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td><a data-toggle="modal" data-target="#exampleModal{{ $item->cliente->id }}">
@@ -42,15 +42,18 @@
 
                             <td>
                                 {{-- relacionar objetos --}}
-                                {{-- {{ $item->producto->alias }} --}}
+                                {{  $detalle->producto->alias }}
 
                             </td>
                             <td>{{ $item->estado }}</td>
 
                             {{-- Condicional de dos opciones disenio_estado(0,1). Indicando si tiene o no un diseño --}}
-                            <td>{{ $item->disenio->disenio_estado  == 1 ? 'TIENE' : 'NO TIENE' }}</td>
-                            <td>{{ $item->cantidad }}</td>
-                            <td>{{ $item->subtotal }}</td>
+                            <td>{{ $item->disenio_estado == 1 ? 'TIENE' : 'NO TIENE' }}</td>
+                      
+                                <td>{{ $detalle->cantidad }}</td>
+                                <td>{{ $detalle->subtotal }}</td>
+                    
+
                             <td width="10px"><a class="btn btn-primary btn btn-sm"
                                     href="{{ route('pedidos.edit', $item->id) }}">Editar</a></td>
                             {{-- BOTON DE BORRAR - cambiar estado del pedido -> activo/inactivo 
@@ -122,6 +125,7 @@
                               </div>
                           </div>
                       </div>  --}}
+                      @endforeach
                     @endforeach
 
                 </tbody>

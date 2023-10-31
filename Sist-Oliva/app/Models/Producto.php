@@ -51,11 +51,14 @@ class Producto extends Model
         return $this->hasMany(SistOliva::class,'idSistema');
     }
     
-    public function pedidos()
-    {
-        return $this->hasMany('\App\Models\Pedido','productos_id','');
+    // public function pedidos()
+    // {
+    //     return $this->hasMany('\App\Models\Pedido','productos_id','');
 
+    // }
+
+    public function detallePedido(){
+        return $this->hasMany('\App\Models\DetallePedido','producto_id','');
     }
-
     use HasFactory;
 }
