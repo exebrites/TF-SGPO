@@ -19,6 +19,7 @@ use App\Models\Producto;
 use Illuminate\Routing\RouteRegistrar;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\prueba;
+use App\Models\Pedido;
 use GuzzleHttp\Psr7\Request;
 
 /*
@@ -123,7 +124,7 @@ Route::resource('/comprobantes', ComprobanteController::class);
 Route::resource('pedidos', PedidoController::class);
 Route::get('/procesar', [PedidoController::class, 'procesarPedido'])->name('procesarPedido.procesar')->middleware(['auth', 'verified']);
 Route::get('/pedidoCliente', [PedidoController::class, 'pedidoCliente'])->name('pedidoCliente');
-
+Route::get('/detallePedido{id}',[PedidoController::class,'detallePedido'])->name('pedido-detallePedido');
 
 /*RUTAS DEL ABM CLIENTE*/
 Route::resource('clientes', ClienteController::class);

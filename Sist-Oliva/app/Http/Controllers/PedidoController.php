@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use App\Models\Cliente;
+use App\Models\DetallePedido;
 use App\Models\Disenio;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
@@ -113,35 +114,74 @@ class PedidoController extends Controller
 
         //\Cart::getContent() que retorna?
         $producto = \Cart::getContent();
-      
-        foreach ($producto as $p) {
-            Pedido::create([
-                'clientes_id' => Auth::user()->id,
-                'productos_id' => $p->id,
-                'disenios_id' =>  1,
-                'fecha_inicio' => null,
-                'fecha_entrega' => null,
-                'estado' => "pendiente-pago", //por defecto: pendiente-pago
-                'disenio_estado' =>   null, //por defecto: no tiene pedido = false
-                'cantidad' => null,//$p->quantity,
-                'subtotal' => null//\Cart::getSubTotal()
 
-            ]);
-        }
-        \Cart::clear();
-        return redirect()->route('checkout.index')->with('success_msg', 'Su pedido se realizó con éxito!');
+        // foreach ($producto as $p) {
+        //     Pedido::create([
+        //         'clientes_id' => Auth::user()->id,
+        //         // 'productos_id' => $p->id,
+        //         'disenios_id' =>  1,
+        //         'fecha_inicio' => null,
+        //         'fecha_entrega' => null,
+        //         'estado' => "pendiente-pago", //por defecto: pendiente-pago
+        //         'disenio_estado' =>   null, //por defecto: no tiene pedido = false
+        //         'cantidad' => null,//$p->quantity,
+        //         'subtotal' => null//\Cart::getSubTotal()
 
-        // // 
+        //     ]);
+        // }
+
+
+        //creando un pedido que tiene un cliente asociado
+
+        Pedido::create([
+            'clientes_id' => Auth::user()->id,
+            // 'productos_id' => $p->id,
+            'disenios_id' =>  1,
+            'fecha_inicio' => null,
+            'fecha_entrega' => null,
+            'estado' => "pendiente-pago", //por defecto: pendiente-pago
+            'disenio_estado' =>   null, //por defecto: no tiene pedido = false
+            'cantidad' => null, //$p->quantity,
+            'subtotal' => null //\Cart::getSubTotal()
+
+        ]);
+        // \Cart::clear();
+        $id = Pedido::max('id');
+        // dd($id);
+
+       
+
+        return redirect()->route('pedido-detallePedido', ['id' => $id]);
     }
 
-    public function pedidoCliente(){
+    public function pedidoCliente()
+    {
 
         $user = Auth::user()->id;
         $cliente = Cliente::find($user);
         //    dd($cliente);
         $pedidos = Pedido::where('clientes_id', $cliente->id)->get();
+
+
+        return view('pedido.pedidoCliente', ['pedidos' => $pedidos]);
+    }
+    public function detallePedido(Request $request)
+    {
+
+        //asocio un pedido , un producto a un detallePedido
+        $id = $request->id;
+        $producto = \Cart::getContent();
+        foreach ($producto as $p) {
+            $idPr = $p->id;
+            detallePedido::create([
+                'pedido_id' => $id,
+                'producto_id' => $idPr
+            ]);
+            
+        }
+      
        
-       
-        return view('pedido.pedidoCliente',['pedidos'=>$pedidos]);
+       return redirect()->route('checkout.index')->with('success_msg', 'Su pedido se realizó con éxito!');
+
     }
 }
