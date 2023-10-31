@@ -14,9 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('detalle_pedidos', function (Blueprint $table) {
+            // id integer pk
+            // pedido_id integer
+            // producto_id integer
+            // cantidad integer
+            // subtotal float
             $table->id();
             $table->foreignId('pedido_id')->constrained('pedidos');
             $table->foreignId('producto_id')->constrained('productos');	
+            $table->integer('cantidad');
+            $table->float('subtotal');
             
             $table->timestamps();
         });

@@ -149,7 +149,7 @@ class PedidoController extends Controller
         $id = Pedido::max('id');
         // dd($id);
 
-       
+
 
         return redirect()->route('pedido-detallePedido', ['id' => $id]);
     }
@@ -171,17 +171,19 @@ class PedidoController extends Controller
         //asocio un pedido , un producto a un detallePedido
         $id = $request->id;
         $producto = \Cart::getContent();
+        // dd($producto);
         foreach ($producto as $p) {
             $idPr = $p->id;
             detallePedido::create([
                 'pedido_id' => $id,
-                'producto_id' => $idPr
+                'producto_id' => $idPr,
+                'cantidad' => $p->quantity,
+                'subtotal' => \Cart::get($idPr)->getPriceSum()
             ]);
-            
         }
-      
-       
-       return redirect()->route('checkout.index')->with('success_msg', 'Su pedido se realizó con éxito!');
 
+        \Cart::clear();
+
+        return redirect()->route('checkout.index')->with('success_msg', 'Su pedido se realizó con éxito!');
     }
 }

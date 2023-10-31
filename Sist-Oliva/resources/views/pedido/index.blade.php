@@ -41,8 +41,8 @@
 
 
                             <td>
-
-                                {{ $item->producto->alias }}
+                                {{-- relacionar objetos --}}
+                                {{-- {{ $item->producto->alias }} --}}
 
                             </td>
                             <td>{{ $item->estado }}</td>
