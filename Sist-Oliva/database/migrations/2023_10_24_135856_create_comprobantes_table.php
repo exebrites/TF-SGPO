@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('comprobantes', function (Blueprint $table) {
 
-            //    id integer [PK]
-            //    pedido_id integer
-
-            //   url_comprobante string
+            // id integer [PK]
+            // pedido_id integer
+            // url_comprobante string
             $table->id();
             $table->foreignId('pedido_id')->constrained('pedidos');
             $table->string('url_comprobantes');
+            
             $table->timestamps();
         });
     }

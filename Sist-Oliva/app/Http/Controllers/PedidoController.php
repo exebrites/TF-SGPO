@@ -135,14 +135,12 @@ class PedidoController extends Controller
 
         Pedido::create([
             'clientes_id' => Auth::user()->id,
-            // 'productos_id' => $p->id,
-            'disenios_id' =>  1,
+
+
             'fecha_inicio' => null,
             'fecha_entrega' => null,
             'estado' => "pendiente-pago", //por defecto: pendiente-pago
-            'disenio_estado' =>   null, //por defecto: no tiene pedido = false
-            'cantidad' => null, //$p->quantity,
-            'subtotal' => null //\Cart::getSubTotal()
+
 
         ]);
         // \Cart::clear();
@@ -178,6 +176,7 @@ class PedidoController extends Controller
             detallePedido::create([
                 'pedido_id' => $id,
                 'producto_id' => $idPr,
+                'disenio_id' => 1,
                 'cantidad' => $p->quantity,
                 'subtotal' => \Cart::get($idPr)->getPriceSum()
             ]);
@@ -186,7 +185,7 @@ class PedidoController extends Controller
         // dd($total);
         \Cart::clear();
 
-        return redirect()->route('pago', ['id' => $id, 'estado' => $estado, 'total' =>  $total]);
+        // return redirect()->route('pago', ['id' => $id, 'estado' => $estado, 'total' =>  $total]);
         // return redirect()->route('checkout.index')->with('success_msg', 'Su pedido se realizó con éxito!');
     }
 }

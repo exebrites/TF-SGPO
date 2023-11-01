@@ -14,18 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('entregas', function (Blueprint $table) {
-            $table->id();
-            // table entrega {
-            //     id integer [PK]
-            // pedido_id string fk
-            //     direccion string
-            //     telefono char
-            //     recepcion string
-            //     nota string
-            //     local boolean
-            //   }
-            $table->unsignedBigInteger('pedido_id')->unique();
 
+            //   id integer [PK]
+            //   pedido_id string 
+            //   direccion string
+            //   telefono char
+            //   recepcion string
+            //   nota string
+            //   local boolean
+
+            $table->id();
+            $table->unsignedBigInteger('pedido_id')->unique();
             $table->string('direccion');
             $table->char('telefono');
             $table->string('recepcion');

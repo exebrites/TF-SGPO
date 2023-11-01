@@ -14,17 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('disenios', function (Blueprint $table) {
+
+            // id integer [pk]
+            // url string
+            // diseno_estado boolean
             $table->id();
             $table->string('url');
             $table->boolean('disenio_estado');
-            // $table->unsignedBigInteger('pedidos_id')->unique();
-
-            // $table->foreign('pedidos_id')->references('id')->on('pedidos')->onDelete('cascade');
-            // // //FALTA RELACIONAR
-
-            // $table->unsignedBigInteger('idProducto')->unique();
-            // $table->foreign('idProducto')->references('id')->on('productos')->onDelete('cascade');
-
+          
             $table->timestamps();
         });
     }
