@@ -32,7 +32,7 @@
                                         <div class="card-body">
                                             <h5>Datos del negocio</h5>
                                             {{-- cada vez que se refresca envia el correo| --}}
-                                            <a class="btn btn-success" href="{{ route('pago') }}">Pagar</a>
+                                            {{-- <a class="btn btn-success" href="{{ route('pago') }}">Pagar</a> --}}
 
                                             <p>Se ha enviado los datos para realizar el pago a tu correo electronico</p>
                                             <form action="{{ route('comprobantes.store') }}" method="post"
@@ -50,6 +50,8 @@
                                                 </div>
 
                                                 <input type="hidden" name="estado" value="{{ $estado }}" id="">
+                                                <input type="hidden" name="id" value="{{ $id }}" id="">
+
                                                 <button type="submit" class="btn btn-primary">Enviar comprobante</button>
                                             </form>
 

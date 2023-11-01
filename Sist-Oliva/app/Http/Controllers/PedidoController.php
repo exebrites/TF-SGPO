@@ -170,6 +170,7 @@ class PedidoController extends Controller
 
         //asocio un pedido , un producto a un detallePedido
         $id = $request->id;
+        $estado = Pedido::where('id', $id)->value('estado');
         $producto = \Cart::getContent();
         // dd($producto);
         foreach ($producto as $p) {
@@ -181,9 +182,11 @@ class PedidoController extends Controller
                 'subtotal' => \Cart::get($idPr)->getPriceSum()
             ]);
         }
-
+        $total = \Cart::getTotal();
+        // dd($total);
         \Cart::clear();
 
-        return redirect()->route('checkout.index')->with('success_msg', 'Su pedido se realizó con éxito!');
+        return redirect()->route('pago', ['id' => $id, 'estado' => $estado, 'total' =>  $total]);
+        // return redirect()->route('checkout.index')->with('success_msg', 'Su pedido se realizó con éxito!');
     }
 }

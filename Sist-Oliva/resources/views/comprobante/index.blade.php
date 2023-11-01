@@ -3,24 +3,23 @@
 @section('title')
 
 @section('content_header')
-    <h1>Listado de comrobantes</h1>
+    <h1>Listado de comprobante en estado pendiente-pago</h1>
 @stop
 
 @section('content')
-{{-- {{dd($comprobantes)}} --}}
+    {{-- {{dd($comprobantes)}} --}}
     <div class="card">
         <div class="card-body">
             <table class="table table-striped">
                 <thead>
                     <tr>
-
+                        <th>Fecha </th>
                         <th>Nro de comprobante</th>
-                        {{-- <th>Nro de diseño</th> --}}
+                        <th>Nro de pedido</th>
+                        <th>estado</th>
                         <th>comprobante</th>
 
-                        {{-- 
-                        <th>Alias del producto</th> 
-                        <th>Ver diseño</th> --}}
+
                         <th colspan="2"></th>
                     </tr>
 
@@ -29,10 +28,10 @@
                 <tbody>
                     @foreach ($comprobantes as $item)
                         <tr>
-                            {{-- <td>{{ $item->pedido->id}}</td> --}}
+                            <td>{{ $item->created_at }}</td>
                             <td>{{ $item->id }}</td>
-                            {{-- <td>{{ $item->pedido->disenio_estado ? 'Tiene' : 'no tiene' }}</td> --}}
-                            {{-- <td>{{$item->pedido->producto->alias }}</td> --}}
+                            <td>{{ $item->pedido->id }}</td>
+                            <td>{{ $item->pedido->estado }}</td>
                             <td><a data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                                     Ver mas
                                 </a></td>
@@ -44,7 +43,7 @@
 
                             {{-- <td width="10px"><a class="btn btn-primary btn btn-sm"
                                     href="{{ route('disenios.edit', $item->id) }}">Editar</a>
-                            </td>--}}
+                            </td> --}}
                             {{-- <td width="10px">
                                 <form action="{{route('disenios.destroy',$item->id)}}" method="post">
                                 @csrf
@@ -66,14 +65,14 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        
 
-                                        
+
+
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <img src="{{ $item->url_comprobantes }}" alt="Imagen 1" class="img-fluid">
                                             </div>
-                                           
+
                                         </div>
 
 

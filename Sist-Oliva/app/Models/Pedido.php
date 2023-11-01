@@ -50,5 +50,10 @@ class Pedido extends Model
     {
         return $this->belongsTo('\App\Models\Disenio', 'disenios_id', 'id');
     }
+
+    public function comprobante()
+    {
+        return $this->hasOne('\App\Models\Comprobante', 'pedido_id', '');
+    }
     use HasFactory;
 }

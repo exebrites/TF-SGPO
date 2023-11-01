@@ -13,14 +13,19 @@ class PagoMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $id;
+    public $total;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($id,$total)
     {
         //
+
+       $this->id=$id;
+       $this->total=$total;
     }
 
     /**
@@ -31,7 +36,7 @@ class PagoMailable extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Pago Mailable',
+            subject: 'Pago del pedido',
         );
     }
 
@@ -42,8 +47,9 @@ class PagoMailable extends Mailable
      */
     public function content()
     {
+        $id = 1;
         return new Content(
-            view: 'emails.Pago',
+            view: 'emails.Pago'
         );
     }
 
