@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\EstadoMailable;
 use App\Models\Pedido;
 use App\Models\Disenio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
@@ -43,15 +45,18 @@ class DisenioController extends Controller
     {
         // detallePedido_id,url_imagen ,url_disenio ,diseno_estado 
 
+        // recepciona una image y la almace en una carpeta
+        // //cambia el nombre de la imagen para poder subirla a una DB
+
+        // $imagen =  $request->file('file')->store('public');
+        // $url = Storage::url($imagen);
+
         // return $request;
         $imagen =  $request->file('file')->store('public');
         // $url = Storage::url($imagen);
         $url_imagen = null;
         $url_disenio =  Storage::url($imagen);;
         $diseno_estado = true;
-        // recepciona una image y la almace en una carpeta
-        // //cambia el nombre de la imagen para poder subirla a una DB
-        // $estado=$request->filled('miCheckbox');
 
         Disenio::create([
             'detallePedido_id' => 1,
@@ -59,20 +64,8 @@ class DisenioController extends Controller
             'url_disenio' => $url_disenio,
             'disenio_estado' => $diseno_estado
         ]);
-        // Reemplaza 'TuModelo' con el nombre de tu modelo
 
-
-
-        // return 'diseño dado de alta';
-
-        // $nombre = $request->file('file')->getClientOriginalName();
-        // $ruta = storage_path() . '\app\public/' . $nombre;
-        // Image::make($request->file('file'))
-        // ->resize(1200,null,function($constraint){
-        //     $constraint->aspectRatio();
-        // })
-        // ->save($ruta);
-
+        Mail::to('exe@gmail.com')->send(new EstadoMailable);
 
         return redirect()->route('disenios.index');
     }
