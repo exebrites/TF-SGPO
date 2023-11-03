@@ -7,9 +7,9 @@
 @stop
 
 @section('content')
-    {{-- {{dd($disenios)}}
-    {{dd($pedidos)}} --}}
-    <a class="btn btn-success" href="{{ route('disenios.create') }}">Subir un nuevo diseño</a>
+    {{-- {{ dd($disenios) }} --}}
+    {{-- {{dd($pedidos)}} --}}
+    {{-- <a class="btn btn-success" href="{{ route('disenios.create') }}">Subir un nuevo diseño</a> --}}
 
     {{-- //listado de Diseños
 Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
@@ -21,7 +21,7 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
 
                         {{-- <th>Nro de pedido</th> --}}
                         <th>Nro de diseño</th>
-                         {{-- <th>Estado del diseño</th> --}}
+                        {{-- <th>Estado del diseño</th> --}}
 
 
                         {{-- <th>Alias del producto</th>  --}}
@@ -38,12 +38,12 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
                             <td>{{ $item->id }}</td>
                             {{-- <td>{{ $item->pedido->disenio_estado ? 'Tiene' : 'no tiene' }}</td> --}}
                             {{-- <td>{{$item->pedido->producto->alias }}</td> --}}
-                            <td><a data-toggle="modal" data-target="#exampleModal{{$item->id}}">
+                            <td><a data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                                     Imagen
                                 </a></td>
 
-                                {{-- display none cuando haga el primer click --}}
-                            
+                            {{-- display none cuando haga el primer click --}}
+
 
 
 
@@ -51,16 +51,16 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
                                     href="{{ route('disenios.edit', $item->id) }}">Editar</a>
                             </td>
                             <td width="10px">
-                                <form action="{{route('disenios.destroy',$item->id)}}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button  class="btn btn-danger btn btn-sm" type="submit">borrar</button>
+                                <form action="{{ route('disenios.destroy', $item->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-danger btn btn-sm" type="submit">borrar</button>
                                 </form>
                             </td>
                         </tr>
 
 
-                        <div class="modal fade" id="exampleModal{{$item->id}}" tabindex="-1"
+                        <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -72,11 +72,12 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
                                     </div>
                                     <div class="modal-body">
                                         <img src="{{ $item->url_disenio }}" alt="Imagen 1" class="img-fluid">
-
-                                        {{-- <img src="{{$item->url}}" alt="Imagen de diseño" srcset=""> --}}
+                                        <br>
+                                        <img src="{{ $item->url_imagen }}" alt="Imagen de diseño" srcset="">
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cerrar</button>
                                         {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
                                     </div>
                                 </div>
@@ -86,7 +87,7 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
 
 
 
-                   
+
                 </tbody>
             </table>
         </div>

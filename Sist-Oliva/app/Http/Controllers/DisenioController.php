@@ -59,7 +59,7 @@ class DisenioController extends Controller
         $diseno_estado = true;
 
         Disenio::create([
-            'detallePedido_id' => 1,
+            'detallePedido_id' => 7,
             'url_imagen' => $url_imagen,
             'url_disenio' => $url_disenio,
             'disenio_estado' => $diseno_estado

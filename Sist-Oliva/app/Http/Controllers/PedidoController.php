@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use App\Models\Cliente;
-use App\Models\DetallePedido;
 use App\Models\Disenio;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
+use App\Models\DetallePedido;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PedidoController extends Controller
 {
@@ -168,7 +169,7 @@ class PedidoController extends Controller
 
         //asocio un pedido , un producto a un detallePedido
         $id = $request->id;
-        $estado = Pedido::where('id', $id)->value('estado');
+
         $producto = \Cart::getContent();
         // dd($producto);
         foreach ($producto as $p) {
@@ -176,9 +177,20 @@ class PedidoController extends Controller
             detallePedido::create([
                 'pedido_id' => $id,
                 'producto_id' => $idPr,
-                'disenio_id' => 1,
                 'cantidad' => $p->quantity,
                 'subtotal' => \Cart::get($idPr)->getPriceSum()
+            ]);
+            $idDP = detallePedido::max('id');
+            // dd($p->attributes->url_disenio);
+            // $imagen =  $request->file('file')->store('public');
+            // $url_imagen = Storage::url($imagen);
+
+            $url_imagen = $p->attributes->url_disenio;
+            Disenio::create([
+                'detallePedido_id' => $idDP,
+                'url_imagen' => $url_imagen,
+                'url_disenio' => null,
+                'disenio_estado' => 1
             ]);
         }
         $total = \Cart::getTotal();
