@@ -41,14 +41,23 @@ class DisenioController extends Controller
      */
     public function store(Request $request)
     {
-        // recepciona una image y la almace en una carpeta
+        // detallePedido_id,url_imagen ,url_disenio ,diseno_estado 
+
+        // return $request;
         $imagen =  $request->file('file')->store('public');
-        //cambia el nombre de la imagen para poder subirla a una DB
-        $estado=$request->filled('miCheckbox');
-        $url = Storage::url($imagen);
+        // $url = Storage::url($imagen);
+        $url_imagen = null;
+        $url_disenio =  Storage::url($imagen);;
+        $diseno_estado = true;
+        // recepciona una image y la almace en una carpeta
+        // //cambia el nombre de la imagen para poder subirla a una DB
+        // $estado=$request->filled('miCheckbox');
+
         Disenio::create([
-            'url' => $url,
-            'disenio_estado' => !$estado
+            'detallePedido_id' => 1,
+            'url_imagen' => $url_imagen,
+            'url_disenio' => $url_disenio,
+            'disenio_estado' => $diseno_estado
         ]);
         // Reemplaza 'TuModelo' con el nombre de tu modelo
 
@@ -65,8 +74,7 @@ class DisenioController extends Controller
         // ->save($ruta);
 
 
-
-        
+        return redirect()->route('disenios.index');
     }
 
     /**
@@ -103,13 +111,32 @@ class DisenioController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // detallePedido_id,url_imagen ,url_disenio ,diseno_estado 
+
+        /**
+       mueve la imagen a public storage
+         *   $imagen =  $request->file('file')->store('public');
+        cambia el nombre de la imagen para poder subirla a una DB
+         *   $url = Storage::url($imagen);
+         */
+
         $imagen =  $request->file('file')->store('public');
-        //cambia el nombre de la imagen para poder subirla a una DB
-        $url = Storage::url($imagen);
-        $disenio = Disenio::find($id);
-        $disenio->update([
-            'url' => $url
-        ]);
+        // // $url = Storage::url($imagen);
+        if ($imagen != null) {
+
+            $url_imagen = null;
+            $url_disenio =  Storage::url($imagen);;
+            $diseno_estado = true;
+            $disenio = Disenio::find($id);
+            $disenio->update([
+                // 'url_imagen' => $url_imagen,
+                'url_disenio' => $url_disenio,
+                'disenio_estado' => $diseno_estado
+            ]);
+        }
+
+
+
         return redirect()->route('disenios.index');
     }
 

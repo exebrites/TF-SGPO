@@ -33,7 +33,8 @@
     <div class="row">
         <div class="car">
             <div class="card-boyd">
-                <form action="{{ route('disenios.update', $disenio,$disenio->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('disenios.update', $disenio, $disenio->id) }}" method="post"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 

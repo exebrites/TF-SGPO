@@ -71,7 +71,7 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src="{{ $item->url }}" alt="Imagen 1" class="img-fluid">
+                                        <img src="{{ $item->url_disenio }}" alt="Imagen 1" class="img-fluid">
 
                                         {{-- <img src="{{$item->url}}" alt="Imagen de diseño" srcset=""> --}}
                                     </div>
