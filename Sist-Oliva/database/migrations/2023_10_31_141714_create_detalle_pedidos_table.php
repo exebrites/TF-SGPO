@@ -17,13 +17,11 @@ return new class extends Migration
             // id integer pk
             // pedido_id integer
             // producto_id integer
-            // disenio_id integer
             // cantidad integer
             // subtotal float
             $table->id();
             $table->foreignId('pedido_id')->constrained('pedidos');
             $table->foreignId('producto_id')->constrained('productos');
-            $table->foreignId('disenio_id')->constrained('disenios');
             $table->integer('cantidad');
             $table->float('subtotal');
 

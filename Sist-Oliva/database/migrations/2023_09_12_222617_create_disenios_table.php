@@ -14,14 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('disenios', function (Blueprint $table) {
-
             // id integer [pk]
-            // url string
+            // detallePedido_id integer
+            // url_imagen string
+            // url_disenio string
             // diseno_estado boolean
             $table->id();
-            $table->string('url');
+            $table->foreignId('detallePedido_id')->constrained('detalle_pedidos');
+            $table->string('url_imagen')->nullable();
+            $table->string('url_disenio')->nullable();
             $table->boolean('disenio_estado');
-          
+
             $table->timestamps();
         });
     }

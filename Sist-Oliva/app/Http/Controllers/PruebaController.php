@@ -8,5 +8,4 @@ use Illuminate\Support\Facades\Storage;
 
 class PruebaController extends Controller
 {
-    
 }

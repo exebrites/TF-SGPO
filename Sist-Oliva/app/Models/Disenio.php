@@ -11,7 +11,12 @@ class Disenio extends Model
 {
     protected $table = 'disenios';
 
-    protected $fillable = ['url','disenio_estado'];
+    protected $fillable = ['detallePedido_id','url_imagen','url_disenio', 'disenio_estado'];
+    // id integer [pk]
+    // detallePedido_id integer
+    // url_imagen string
+    // url_disenio string
+    // diseno_estado boolean
 
     /*----------------------------ATRIBUTOS----------------------------------------*/
 
@@ -29,8 +34,9 @@ class Disenio extends Model
     // {
     //     return $this->belongsTo('App\Models\Producto');
     // }
-    public function pedido(){
-        return $this->hasOne('App\Models\Pedido','disenios_id','');
+    public function pedido()
+    {
+        return $this->hasOne('App\Models\Pedido', 'disenios_id', '');
     }
     use HasFactory;
 }
