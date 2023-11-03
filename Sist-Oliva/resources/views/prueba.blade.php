@@ -12,7 +12,18 @@
 </head>
 
 <body>
-   
+    <ul>
+        @foreach ($disenios as $item)
+            <br>
+            <li>id del diseño:{{ $item->id }}</li>
+            <li>imagen del diseño:<img src="{{ $item->url_imagen }}" alt=""></li><a
+                href="{{ route('prueba.d', $item->id) }}">Descargar</a>
+            <br>
+        @endforeach
+    </ul>
+
+
+    <br>
 </body>
 
 </html>

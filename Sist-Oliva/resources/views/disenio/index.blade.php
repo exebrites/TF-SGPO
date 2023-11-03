@@ -18,14 +18,14 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
             <table class="table table-striped">
                 <thead>
                     <tr>
-
                         {{-- <th>Nro de pedido</th> --}}
+                        {{-- <th>Nro de detalle</th> --}}
                         <th>Nro de diseño</th>
-                        {{-- <th>Estado del diseño</th> --}}
+                        <th>imagen de diseño</th>
+                        {{-- <th>diseño</th> --}}
 
+                        <th>estado</th>
 
-                        {{-- <th>Alias del producto</th>  --}}
-                        <th>Ver diseño</th>
                         <th colspan="2"></th>
                     </tr>
 
@@ -39,10 +39,12 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
                             {{-- <td>{{ $item->pedido->disenio_estado ? 'Tiene' : 'no tiene' }}</td> --}}
                             {{-- <td>{{$item->pedido->producto->alias }}</td> --}}
                             <td><a data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
-                                    Imagen
+                                    Imagen de diseño
+
                                 </a></td>
 
                             {{-- display none cuando haga el primer click --}}
+                            <td>{{ $item->disenio_estado = 1 ? 'Tiene' : 'no tiene ' }}</td>
 
 
 
@@ -71,9 +73,10 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src="{{ $item->url_disenio }}" alt="Imagen 1" class="img-fluid">
-                                        <br>
-                                        <img src="{{ $item->url_imagen }}" alt="Imagen de diseño" srcset="">
+                                        {{-- <img src="{{ $item->url_disenio }}" alt="Imagen 1" class="img-fluid"> --}}
+                                        <img src="{{ $item->url_imagen }}" class="img-fluid" alt="Imagen de diseño"
+                                            srcset=""><br>
+                                        <a href="{{ route('disenios.descargar', $item->id) }}">Descargar imagen </a>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"

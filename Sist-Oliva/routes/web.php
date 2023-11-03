@@ -38,27 +38,8 @@ use GuzzleHttp\Psr7\Request;
 /*RUTAS DE PRUEBAS*/
 
 
-Route::get('/prueba', function () {
-
-    // $p = Producto::find(1);
-    // $quantity = 1;
-    
-    // \Cart::add(array(
-    //     'id' => $p->id,
-    //     'name' => $p->name,
-    //     'price' => $p->price,
-    //     'quantity' => $quantity,
-    //     'attributes' => array(
-    //         'imagen_path' => $p->img,
-    //         'slug' => $p->slug
-    //     )
-    // ));
-
-    $c = \Cart::getContent();
-
-
-    return view('prueba', ['c' => $c]);
-})->name('prueba.index');
+Route::get('/prueba', [PruebaController::class,'index'])->name('prueba.index');
+Route::get('/prueba/descargar{id}', [PruebaController::class,'descargar'])->name('prueba.d');
 
 
 /*FIN RUTAS DE PRUEBAS*/
@@ -88,9 +69,9 @@ Route::resource('/bocetos', BocetoController::class);
 /** RUTAS DE DISEÑOS
  * 
  */
-// Route::post('/prueba',[PruebaController::class,'imagen'])->name('prueba');
 Route::resource('/disenios', DisenioController::class);
-// Route::post('/disenios', [PruebaController::class, 'imagen'])->name('');
+Route::get('/descargar{id}', [DisenioController::class,'descargar'])->name('disenios.descargar');
+
 
 
 

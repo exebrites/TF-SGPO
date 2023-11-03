@@ -32,7 +32,7 @@ class DisenioController extends Controller
     public function create()
     {
 
-        return view('disenio.create');
+        // return view('disenio.create');
     }
 
     /**
@@ -148,11 +148,24 @@ class DisenioController extends Controller
         return redirect()->route('disenios.index');
     }
 
-    function imagen(Request $request)
+
+
+
+    /**
+     * Método para descargar una imagen a partir de su ID.
+     *
+     * @param int $id - El ID de la imagen que se desea descargar.
+     * @return \Illuminate\Http\Response - Una respuesta HTTP que contiene la imagen para su descarga.
+     */
+    public function descargar($id)
     {
-        //recepciona una image y la almace en una carpeta
-        $imagen =  $request->file('file')->store('public');
-        //cambia el nombre de la imagen para poder subirla a una DB
-        $url = Storage::url($imagen);
+        // Paso 1: Obtener la URL de la imagen a partir del ID proporcionado.
+        $img = Disenio::where('id', $id)->value('url_imagen');
+
+        // Paso 2: Crear la URL completa a la ubicación de la imagen en el servidor.
+        $url_full = "D:\TF-SGPO\Sist-Oliva\public" . $img;
+
+        // Paso 3: Generar una respuesta HTTP que permite la descarga de la imagen.
+        return response()->download($url_full);
     }
 }
