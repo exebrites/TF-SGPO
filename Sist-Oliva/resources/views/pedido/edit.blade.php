@@ -15,7 +15,7 @@
         --}}
 @section('content')
     <div class="card">
-        {{-- {{ dd($pedido) }} --}}
+        {{-- {{ dd($pedido->detallePedido[0]->disenio->disenio_estado) }} --}}
         <div class="card-body">
             <form action="{{ route('pedidos.update', $pedido->id) }}" method="post">
                 @csrf

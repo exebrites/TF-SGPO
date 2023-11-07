@@ -39,6 +39,7 @@
                                     {{ $item->cliente->nombre }}
                                 </a></td>
 
+                                {{-- {{$detalle->disenio->disenio_estado}} --}}
 
                             <td>
                                 {{-- relacionar objetos --}}
@@ -48,7 +49,7 @@
                             <td>{{ $item->estado }}</td>
 
                             {{-- Condicional de dos opciones disenio_estado(0,1). Indicando si tiene o no un diseño --}}
-                            <td>{{ $item->disenio_estado == 1 ? 'TIENE' : 'NO TIENE' }}</td>
+                            <td>{{ $detalle->disenio->disenio_estado == 1 ? 'TIENE' : 'NO TIENE' }}</td>
                       
                                 <td>{{ $detalle->cantidad }}</td>
                                 <td>{{ $detalle->subtotal }}</td>

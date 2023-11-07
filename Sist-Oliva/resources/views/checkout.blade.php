@@ -22,19 +22,23 @@
 
             <div class="container">
                 <h5>Tu estado de pedido es el siguiente : {{ $estado }}</h3>
+                    <br>
+
                     <div class="row">
 
                         @switch($estado)
                             @case('pendiente-pago')
                                 {{-- {{dd($estado)}} --}}
+
                                 <div class="col">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5>Datos del negocio</h5>
-                                            {{-- cada vez que se refresca envia el correo| --}}
-                                            {{-- <a class="btn btn-success" href="{{ route('pago') }}">Pagar</a> --}}
-
-                                            <p>Se ha enviado los datos para realizar el pago a tu correo electronico</p>
+                                            <small>El estado de {{ $estado }} significa que tu pedido esta a la espera a que
+                                                subas el comprobante de pago y que sea confirmado por la gerencia para asi seguir
+                                                con los proximos pasos </small><br>
+                                            <br>
+                                            <p>Se envió un mensaje a tu correo electrónico para que puedas realizar el pago del
+                                                pedido</p>
                                             <form action="{{ route('comprobantes.store') }}" method="post"
                                                 enctype="multipart/form-data">
                                                 @csrf
@@ -66,6 +70,8 @@
                                 <div class="col">
                                     <div class="card">
                                         <div class="card-body">
+                                            <small>El estado de {{ $estado }} significa que el pago fue confirmado y que ahora necesitas completar los siguientes campos para que sepamos donde entregar el pedido </small><br>
+                                            <br>
                                             <h5>Datos de entrega</h5>
 
                                             <form action="{{ route('entrega.store') }}" method="POST">
@@ -142,7 +148,9 @@
                             @break
 
                             @default
-                                {{-- {{ dd($estado) }} --}}
+                            <small>El estado de {{ $estado }} significa que tu pedido esta se comenzó a trabajar y pronto tendras noticias de nosotros para seguir con las siguientes etapas </small><br>
+                            <br>
+                                
                         @endswitch
 
 
@@ -161,7 +169,7 @@
             {{-- <a href="#" class="btn btn-success">Realizar pedido</a> --}}
 
 
-            <a href="{{ route('shop') }} " class="btn btn-danger">Cancelar</a>
+            <div> <a class="btn btn-danger" href="{{ url()->previous() }}">Cancelar</a></div>
 
         </div>
 

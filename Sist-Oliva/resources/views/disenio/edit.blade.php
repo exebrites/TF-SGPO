@@ -2,6 +2,25 @@
 <link rel="stylesheet" href="/css/app.css">
 
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
+
+<style>
+    /* Estilos personalizados para centrar la imagen verticalmente en la parte superior */
+    .center-top {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 50vh;
+    }
+
+    /* Estilo para reducir el tamaño de la imagen */
+    .small-image {
+        max-width: 50%;
+        /* Puedes ajustar este valor según tus necesidades */
+    }
+</style>
+
+
 @section('title')
 
 @section('content_header')
@@ -10,17 +29,20 @@
 
 @section('content')
     {{-- {{ dd($disenio) }} --}}
-    <div class="row">
-        <div class="col">
-            <div class="car">
-                <div class="card-boy">
+    {{-- <div class="card">
+        <div class="card-body">
 
-                    {{-- diseño
-                    <img src="{{ $disenio->url }}" alt="Imagen de diseño" srcset=""> --}}
-                </div>
-            </div>
-        </div>
-        {{-- <div class="col-6">
+            <div class="row">
+                <div class="col">
+                    <div class="car">
+                        <div class="card-boy">
+
+                            {{-- diseño --}}
+    {{-- <img src="{{ $disenio->url_disenio }}" class="img-fluid" alt="Imagen de diseño" srcset="">
+                        </div>
+                    </div>
+                </div> --}}
+    {{-- <div class="col-6">
             <div class="card">
                 <div class="card-body">
                     Respuesta
@@ -29,33 +51,105 @@
                 </div>
             </div>
         </div> --}}
-    </div>
-    <div class="row">
-        <div class="car">
-            <div class="card-boyd">
-                <form action="{{ route('disenios.update', $disenio, $disenio->id) }}" method="post"
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+    {{-- </div>
+            
+            <div class="row"></div>
 
-                    <div class="form-group">
-                        <label>Seleccionar imagen</label>
-                        {{-- required --}}
-                        <input type="file" class="form-control-file" name="file" accept="image/*" required>
-                        {{-- @error('file')
-                <br>
-                <small style="color:red">{{$message}}</small>
-            @enderror --}}
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Actualizar diseño</button>
-                </form>
-
-
-            </div>
-            <a href="{{ route('disenios.index') }}" class="btn btn-danger">volver atras</a>
         </div>
+    </div>  --}}
+
+
+
+    <div class="container">
+        <div class="row center-top">
+            <div class="col-md-4">
+                <img src="{{ $disenio->url_disenio }}"class="img-fluid small-image" alt="Imagen">
+            </div>
+
+        </div>
+        <div class="row center-top">
+            <form action="{{ route('disenios.update', $disenio, $disenio->id) }}" method="post"
+                enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <div class="form-group">
+                    <label>Seleccionar imagen</label>
+
+                    <input type="file" class="form-control-file" name="file" accept="image/*" required>
+                    @error('file')
+                        <br>
+                        <small style="color:red">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <button type="submit" class="btn btn-primary">Actualizar diseño</button>
+                <br>
+            </form>
+
+
+        </div>
+        {{-- <div class="row center-top"> 
+            <a href="{{ route('disenios.index') }}" class="btn btn-danger">volver atras</a>
+        </div> --}}
+
+
+        {{-- <div class="row">
+            <div class="car">
+                <div class="card-boyd">
+                    <form action="{{ route('disenios.update', $disenio, $disenio->id) }}" method="post"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="form-group">
+                            <label>Seleccionar imagen</label>
+
+                            <input type="file" class="form-control-file" name="file" accept="image/*" required>
+                            @error('file')
+                                <br>
+                                <small style="color:red">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Actualizar diseño</button>
+                    </form>
+
+
+                </div>
+                <a href="{{ route('disenios.index') }}" class="btn btn-danger">volver atras</a>
+            </div>
+        </div> --}}
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     {{-- Logica para manejar dropzone --}}
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>

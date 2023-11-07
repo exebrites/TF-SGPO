@@ -129,6 +129,7 @@ class DisenioController extends Controller
         }
 
 
+        Mail::to('exe@gmail.com')->send(new EstadoMailable);
 
         return redirect()->route('disenios.index');
     }

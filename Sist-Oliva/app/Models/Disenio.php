@@ -38,5 +38,9 @@ class Disenio extends Model
     {
         return $this->hasOne('App\Models\Pedido', 'disenios_id', '');
     }
+    public function detallePedido(){
+        return $this->belongsTo('App\Models\DetallePedido','detallePedido_id','');
+
+    }
     use HasFactory;
 }

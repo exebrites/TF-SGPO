@@ -40,17 +40,16 @@
                 Nombre del gerente: "jualanodetal"
                 <br>
                 <br>
-                Una vez realizada la transferencia bancaria subir una imagen del comprobante mas abajo para luego ser
-                aprobada
+                Una vez realizada la transferencia bancaria subí tú  comprobante para luego ser
+                aprobado el pago
 
-                En caso de ya haber efecturado el pago y no verlo reflejado en el sistema contactanos a "Direccion de
-                correo de la empresa"
+                En caso de ya haber efectuado  el pago y no verlo reflejado en el sistema escribinos a olivas@gmail.com
                 <br>
                 <br>
-                Podes realizar el pago a travez de mercado pago : <a href="https://www.mercadopago.com.ar/home">Mercado
+                Podes realizar el pago a traves de mercado pago : <a href="https://www.mercadopago.com.ar/home">Mercado
                     pago </a>
                 <br>
-                Recorda: Descargá tu comprobante y subimo luego de haber realizado el pago
+                Recorda: Descargá tu comprobante y subirlo luego de haber realizado el pago
                 <br><br>
                 Siguiente pago: <a href="{{ route('checkout.index') }}">subir comprobate</a>
             </p>

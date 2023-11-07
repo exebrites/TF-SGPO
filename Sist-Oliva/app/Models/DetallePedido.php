@@ -15,6 +15,10 @@ class DetallePedido extends Model
     // cantidad integer
     // subtotal float
 
+    public function disenio(){
+        return $this->hasOne('\App\Models\Disenio','detallePedido_id','');
+
+    }
 
     public function pedidos()
     {

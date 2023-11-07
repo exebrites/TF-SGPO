@@ -6,9 +6,11 @@ use App\Models\Pedido;
 use App\Models\Cliente;
 use App\Models\Disenio;
 use Darryldecode\Cart\Cart;
+use App\Mail\EstadoMailable;
 use Illuminate\Http\Request;
 use App\Models\DetallePedido;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class PedidoController extends Controller
@@ -83,8 +85,10 @@ class PedidoController extends Controller
         $pedido = Pedido::find($id);
         $pedido->update([
             'estado' => $request->estado,
-            'disenio_estado' => $request->disenio
+           // 'disenio_estado' => $request->disenio
         ]);
+        Mail::to('exe@gmail.com')->send(new EstadoMailable);
+
         return redirect()->route('pedidos.index');
     }
 
@@ -116,20 +120,7 @@ class PedidoController extends Controller
         //\Cart::getContent() que retorna?
         $producto = \Cart::getContent();
 
-        // foreach ($producto as $p) {
-        //     Pedido::create([
-        //         'clientes_id' => Auth::user()->id,
-        //         // 'productos_id' => $p->id,
-        //         'disenios_id' =>  1,
-        //         'fecha_inicio' => null,
-        //         'fecha_entrega' => null,
-        //         'estado' => "pendiente-pago", //por defecto: pendiente-pago
-        //         'disenio_estado' =>   null, //por defecto: no tiene pedido = false
-        //         'cantidad' => null,//$p->quantity,
-        //         'subtotal' => null//\Cart::getSubTotal()
-
-        //     ]);
-        // }
+       
 
 
         //creando un pedido que tiene un cliente asociado
@@ -169,7 +160,7 @@ class PedidoController extends Controller
 
         //asocio un pedido , un producto a un detallePedido
         $id = $request->id;
-
+        $estado = Pedido::where('id', $id)->value('estado');
         $producto = \Cart::getContent();
         // dd($producto);
         foreach ($producto as $p) {
@@ -197,7 +188,7 @@ class PedidoController extends Controller
         // dd($total);
         \Cart::clear();
 
-        // return redirect()->route('pago', ['id' => $id, 'estado' => $estado, 'total' =>  $total]);
+        return redirect()->route('pago', ['id' => $id, 'estado' => $estado, 'total' =>  $total]);
         // return redirect()->route('checkout.index')->with('success_msg', 'Su pedido se realizó con éxito!');
     }
 }
