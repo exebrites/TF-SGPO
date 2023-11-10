@@ -11,6 +11,7 @@ use App\Http\Controllers\DisenioController;
 use App\Http\Controllers\EntregaController;
 use App\Http\Controllers\fileController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
@@ -53,6 +54,8 @@ Route::get('home', function() {
 
 
 
+//RUTAS MATERIAL
+Route::resource('/materiales',MaterialController::class);
 
 
 //RUTAS PROVEEDOR

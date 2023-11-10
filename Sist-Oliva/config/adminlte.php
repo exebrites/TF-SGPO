@@ -364,6 +364,11 @@ return [
         'text' => 'Gestionar proveedores', 
         'route' => 'proveedores.index',
        ],
+       [
+        //'route'=> 'ruta'
+        'text' => 'Gestionar materiales', 
+        'route' => 'materiales.index',
+       ],
       
       
     ],
