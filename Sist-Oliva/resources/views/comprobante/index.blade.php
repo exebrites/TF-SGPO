@@ -28,7 +28,8 @@
                 <tbody>
                     @foreach ($comprobantes as $item)
                         <tr>
-                            <td>{{ $item->created_at }}</td>
+                            {{-- x --}}
+                            <td>{{ $item->created_at->format('Y-m-d')}}</td>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->pedido->id }}</td>
                             <td>{{ $item->pedido->estado }}</td>

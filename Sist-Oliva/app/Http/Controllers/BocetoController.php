@@ -17,18 +17,6 @@ class BocetoController extends Controller
     function store(Request $request)
     {
 
-        // disenio_estado toma el valor de no tiene 
-        // $ultimoId = Disenio::max('id');
-        // //    return \Cart::getSubTotal();
-
-        // $disenio = Disenio::find($ultimoId);
-        // $disenio->update(['disenio_estado' => true]);
-
-
-
-
-        // CREAR UN DISEÑO -> Cuando no se suba un diseño
-
         // ---------------------------------
         $img_logo =  $request->file('logo')->store('public');
         $url_logo = Storage::url($img_logo);
@@ -37,6 +25,7 @@ class BocetoController extends Controller
         $img_img =  $request->file('img')->store('public');
         $url_img = Storage::url($img_img);
 
+        
         Boceto::create([
             'negocio' => $request->nombre,
             'objetivo' => $request->objetivo,
@@ -46,10 +35,11 @@ class BocetoController extends Controller
             'url_img' => $url_img
         ]);
 
-        return redirect()->route('cart.index')->with('success_msg', 'Se cargó con exito la informacion para crear un boceto, pronto nos comunicaremos con usted !');
+        return back()->with('success_msg', 'Se cargó con exito la informacion para crear un boceto, pronto nos comunicaremos con usted !Todavia su producto no fue agregado al carrito ');
     }
-    function create()
+    function create(Request $request)
     {
         return view('boceto.create');
+        // return $request;
     }
 }

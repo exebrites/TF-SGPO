@@ -21,12 +21,13 @@
                     <div class="accordion" id="accordionExample">
 
                         @foreach ($pedidos as $item)
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingTwo">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseTwo{{ $item->id }}" aria-expanded="false"
                                         aria-controls="collapseTwo">
-                                        Nro de pedido: {{ $item->id }} <br> Estado: {{ $item->estado }}
+                                        Nro de pedido: {{ $item->id }} <br> Estado: {{ $item->estado }} <br> Ultima actualizacion de pedido : {{ $item->updated_at->format('Y-m-d') }} 
                                     </button>
                                 </h2>
 

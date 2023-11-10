@@ -169,4 +169,68 @@ class DisenioController extends Controller
         // Paso 3: Generar una respuesta HTTP que permite la descarga de la imagen.
         return response()->download($url_full);
     }
+
+
+    /**
+     Codigo comentado Revisar
+     
+    public function store(Request $request)
+{
+    // Recibe un objeto de solicitud ($request)
+
+    // Guarda la imagen recibida en una carpeta
+    $imagen = $request->file('file')->store('public');
+
+    // Inicializa las variables
+    $url_imagen = null; // La imagen aún no está disponible
+    $url_disenio = Storage::url($imagen); // URL de la imagen almacenada en la carpeta 'public'
+    $diseno_estado = true;
+
+    // Crea un nuevo registro de diseño en la base de datos
+    Disenio::create([
+        'detallePedido_id' => 7, // Se asume un valor fijo (debería asignarse correctamente)
+        'url_imagen' => $url_imagen,
+        'url_disenio' => $url_disenio,
+        'disenio_estado' => $diseno_estado
+    ]);
+
+    // Envía un correo electrónico a la dirección 'exe@gmail.com' utilizando la clase Mail y el mailable EstadoMailable
+    Mail::to('exe@gmail.com')->send(new EstadoMailable);
+
+    // Redirige al usuario a la ruta 'disenios.index'
+    return redirect()->route('disenios.index');
+}
+
+    public function update(Request $request, $id)
+{
+    // Recibe un objeto de solicitud ($request) y el ID del diseño que se desea actualizar
+
+    // Guarda la imagen recibida en la carpeta 'public'
+    $imagen = $request->file('file')->store('public');
+
+    // Inicializa las variables
+    $url_imagen = null; // La imagen aún no está disponible
+    $url_disenio = Storage::url($imagen); // URL de la imagen almacenada en la carpeta 'public'
+    $diseno_estado = true;
+
+    // Verifica si se cargó una nueva imagen
+    if ($imagen != null) {
+        // Encuentra el diseño correspondiente en la base de datos utilizando el ID
+        $disenio = Disenio::find($id);
+
+        // Actualiza el diseño con la nueva URL de la imagen y el nuevo estado
+        $disenio->update([
+            'url_disenio' => $url_disenio,
+            'disenio_estado' => $diseno_estado
+        ]);
+    }
+
+    // Envía un correo electrónico a la dirección 'exe@gmail.com' utilizando la clase Mail y el mailable EstadoMailable
+    Mail::to('exe@gmail.com')->send(new EstadoMailable);
+
+    // Redirige al usuario a la ruta 'disenios.index'
+    return redirect()->route('disenios.index');
+}
+
+     */
 }

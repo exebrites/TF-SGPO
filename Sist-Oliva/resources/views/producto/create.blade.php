@@ -7,102 +7,67 @@
 @stop
 
 @section('content')
-   {{--<div class="card">
-    <div class="card-body">
-         parametro enctype --}}
-        {{-- {!! Form::open(['route'=>'productos.store']) !!} 
-        {!! Form::open(['route'=>'productos.store','enctype'=>'multipart/form-data']) !!} 
-            <div class="form-group">
-                {!! Form::label('name','Nombre') !!}
-                {!! Form::text('name',null,['class'=>'form-control','placeholder'=>'ingrese el nombre del producto']) !!}
 
-                {!! Form::label('price','Precio') !!}
-                {!! Form::text('price',null,['class'=>'form-control','placeholder'=>'ingrese el precio del producto']) !!}
-
-                {!! Form::label('description','Descripcion') !!}
-                {!! Form::text('description',null,['class'=>'form-control','placeholder'=>'ingrese la descripcion del producto']) !!}
-
-                input file
-                <input type="file" name="file" id="" accept="image/*">
-
-                {!! Form::label('file','Seleccionar imagen') !!}
-                <br>
-                {!! Form::file('file',null,['class'=>'form-control','placeholder'=>'ingrese la imagen del producto','accept'=>'image/*']) !!}
-               
-
-            </div>
-            {!! Form::submit('Agregar producto',['class'=>'btn btn-success'])  !!}
-
-           <a class="btn btn-danger" href="{{route('productos.index')}}">Cancelar</a>
-            {!! Form::close() !!}
+    <div class="card">
+        <div class="card-body">
+            <form action="{{ route('productos.store') }}" method="post" enctype="multipart/form-data">
+                @csrf
 
 
-    </div>
-   </div> --}}
-{{-- Implementacion con blade --}}
-{{-- 
-1-que modifique
-2-traer los datos --}}
-   <div class="card">
-    <div class="card-body">
-        <form action="{{route('productos.store')}}" method="post" enctype="multipart/form-data">
-          @csrf
-
-         
-          <div class="form-group">
-              <label>Nombre</label>
-              <input type="text" class="form-control" name="name" value="{{old('name')}}">
-              @error('name')
-              <br>
-              <small style="color:red">{{$message}}</small>
-                 @enderror
-            </div>
-             {{--!! Agregar un alias o nomenclaruta !!--}}
-            <div class="form-group">
-              <label>Alias</label>
-              <input type="text" class="form-control" name="alias" value="{{old('')}}">
-              {{-- @error('name')
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                    @error('name')
+                        <br>
+                        <small style="color:red">{{ $message }}</small>
+                    @enderror
+                </div>
+                {{-- !! Agregar un alias o nomenclaruta !! --}}
+                <div class="form-group">
+                    <label>Alias</label>
+                    <input type="text" class="form-control" name="alias" value="{{ old('') }}">
+                    {{-- @error('name')
               <br>
               <small style="color:red">{{$message}}</small>
                  @enderror --}}
-            </div>
-          
-            <div class="form-group">
-              <label>Precio</label>
-              <input type="text" class="form-control" name="price" value="{{old('price')}}">
-              @error('price')
-              <br>
-              <small style="color:red">{{$message}}</small>
-          @enderror
-            </div>
+                </div>
 
-            
-            <div class="form-group">
-                <label >Descripcion</label>
-                <input type="text" class="form-control" name="description" value="{{old('description')}}">
-                @error('description')
-                <br>
-                <small style="color:red">{{$message}}</small>
-            @enderror
-              </div>
-          
+                <div class="form-group">
+                    <label>Precio</label>
+                    <input type="text" class="form-control" name="price" value="{{ old('price') }}">
+                    @error('price')
+                        <br>
+                        <small style="color:red">{{ $message }}</small>
+                    @enderror
+                </div>
 
-        
-            <div class="form-group">
-              <label >Seleccionar imagen</label>
-              <input type="file" class="form-control-file" name="file" accept="image/*" >
-              @error('file')
-              <br>
-              <small style="color:red">{{$message}}</small>
-          @enderror
-            </div>
-         
 
-          <button  type="submit" class="btn btn-primary">Crear nuevo producto</button>
-         
-        </form>
-        <a href="{{route('productos.index')}}" class="btn btn-danger">Cancelar</a>
-      </div>
-      
-   </div>
+                <div class="form-group">
+                    <label>Descripcion</label>
+                    <input type="text" class="form-control" name="description" value="{{ old('description') }}">
+                    @error('description')
+                        <br>
+                        <small style="color:red">{{ $message }}</small>
+                    @enderror
+                </div>
+
+
+
+                <div class="form-group">
+                    <label>Seleccionar imagen</label>
+                    <input type="file" class="form-control-file" name="file" accept="image/*">
+                    @error('file')
+                        <br>
+                        <small style="color:red">{{ $message }}</small>
+                    @enderror
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Crear nuevo producto</button>
+
+            </form>
+            <a href="{{ route('productos.index') }}" class="btn btn-danger">Cancelar</a>
+        </div>
+
+    </div>
 @stop

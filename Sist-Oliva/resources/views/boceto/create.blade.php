@@ -8,6 +8,15 @@
 
             <div class="card">
                 <div class="card-body">
+
+                    @if (session()->has('success_msg'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session()->get('success_msg') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                    @endif
                     <h1>Realizar un boceto</h1>
                     <form action="{{ route('bocetos.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf

@@ -13,6 +13,7 @@ use App\Http\Controllers\fileController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\PruebaController;
 use App\Mail\PagoMailable;
 use App\Models\Producto;
@@ -20,6 +21,7 @@ use Illuminate\Routing\RouteRegistrar;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\prueba;
 use App\Models\Pedido;
+use App\Models\Proveedor;
 use GuzzleHttp\Psr7\Request;
 
 /*
@@ -41,7 +43,9 @@ use GuzzleHttp\Psr7\Request;
 Route::get('/prueba', [PruebaController::class,'index'])->name('prueba.index');
 Route::get('/prueba/descargar{id}', [PruebaController::class,'descargar'])->name('prueba.d');
 
-
+Route::get('home', function() {
+    return view('home');
+});
 /*FIN RUTAS DE PRUEBAS*/
 
 
@@ -51,6 +55,8 @@ Route::get('/prueba/descargar{id}', [PruebaController::class,'descargar'])->name
 
 
 
+//RUTAS PROVEEDOR
+Route::resource('/proveedores',ProveedorController::class);
 
 
 

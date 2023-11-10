@@ -56,7 +56,7 @@
                                     
                                 {{-- Arreglar esta parte esta rota --}}
                                 {{-- <b><a href="{{route('productos.show',$item)}}">{{ $item->name }}</a></b><br> --}}
-                                <b>Price: </b>${{ $item->price }}<br>
+                                <b>Precio unitario: </b>${{ $item->price }}<br>
                                 <b>Sub Total: </b>${{ \Cart::get($item->id)->getPriceSum() }}<br>
                                 {{--                                <b>With Discount: </b>${{ \Cart::get($item->id)->getPriceSumWithConditions() }}--}}
                             </p>

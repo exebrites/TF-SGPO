@@ -21,7 +21,7 @@ class ProductoSeeder extends Seeder
 
         Producto::create([
             'name' => 'Almanaque Anillado',
-            'alias'=>'AA14x15',
+            'alias' => 'AA14x15',
             'slug' => 'almanaque-anillado',
             // 'details' => '15 pulgadas, 1TB HDD, 32GB RAM',
             'price' => 3393,
@@ -33,7 +33,7 @@ class ProductoSeeder extends Seeder
         ]);
         Producto::create([
             'name' => 'Carpetas de Presentación',
-            'alias'=>'CP30x40',
+            'alias' => 'CP30x40',
             'slug' => 'carpeta-presentacion',
             // 'details' => '15 pulgadas, 1TB HDD, 32GB RAM',
             'price' => 1950.32,
@@ -43,6 +43,8 @@ class ProductoSeeder extends Seeder
             // 'brand_id' => 1,
             'image_path' => '/storage/gRiyp82dYfxgMtYymZxmASznBk8GWWD1b6NiEOr5.jpg'
         ]);
+
+        \App\Models\Producto::factory(10)->create();
         // Producto::create([
         //     'name' => 'Volantes Flyers Folletos',
         //     'slug' => 'flyres',

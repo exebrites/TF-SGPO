@@ -359,6 +359,11 @@ return [
         'text' => 'Comprobantes', 
         'route' => 'comprobantes.index',
        ],
+       [
+        //'route'=> 'ruta'
+        'text' => 'Gestionar proveedores', 
+        'route' => 'proveedores.index',
+       ],
       
       
     ],
