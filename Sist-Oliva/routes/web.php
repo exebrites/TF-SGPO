@@ -21,6 +21,7 @@ use App\Models\Producto;
 use Illuminate\Routing\RouteRegistrar;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\prueba;
+use App\Models\MaterialProveedor;
 use App\Models\Pedido;
 use App\Models\Proveedor;
 use GuzzleHttp\Psr7\Request;
@@ -41,10 +42,10 @@ use GuzzleHttp\Psr7\Request;
 /*RUTAS DE PRUEBAS*/
 
 
-Route::get('/prueba', [PruebaController::class,'index'])->name('prueba.index');
-Route::get('/prueba/descargar{id}', [PruebaController::class,'descargar'])->name('prueba.d');
+Route::get('/prueba', [PruebaController::class, 'index'])->name('prueba.index');
+Route::get('/prueba/descargar{id}', [PruebaController::class, 'descargar'])->name('prueba.d');
 
-Route::get('home', function() {
+Route::get('home', function () {
     return view('home');
 });
 /*FIN RUTAS DE PRUEBAS*/
@@ -55,16 +56,19 @@ Route::get('home', function() {
 
 
 //RUTAS MATERIAL
-Route::resource('/materiales',MaterialController::class);
-
+Route::resource('/materiales', MaterialController::class);
+Route::get('/historialMateriales', function () {
+    $mp = MaterialProveedor::all();
+    return view('historialmateriales', compact('mp'));
+})->name('historialMateriales');
 
 //RUTAS PROVEEDOR
-Route::resource('/proveedores',ProveedorController::class);
+Route::resource('/proveedores', ProveedorController::class);
 
 
 
 //RUTAS ENTREGA
-Route::resource('entrega',EntregaController::class);
+Route::resource('entrega', EntregaController::class);
 
 
 //RUTA BOCETO
@@ -79,7 +83,7 @@ Route::resource('/bocetos', BocetoController::class);
  * 
  */
 Route::resource('/disenios', DisenioController::class);
-Route::get('/descargar{id}', [DisenioController::class,'descargar'])->name('disenios.descargar');
+Route::get('/descargar{id}', [DisenioController::class, 'descargar'])->name('disenios.descargar');
 
 
 
@@ -114,7 +118,7 @@ Route::resource('/comprobantes', ComprobanteController::class);
 Route::resource('pedidos', PedidoController::class);
 Route::get('/procesar', [PedidoController::class, 'procesarPedido'])->name('procesarPedido.procesar')->middleware(['auth', 'verified']);
 Route::get('/pedidoCliente', [PedidoController::class, 'pedidoCliente'])->name('pedidoCliente');
-Route::get('/detallePedido{id}',[PedidoController::class,'detallePedido'])->name('pedido-detallePedido');
+Route::get('/detallePedido{id}', [PedidoController::class, 'detallePedido'])->name('pedido-detallePedido');
 
 /*RUTAS DEL ABM CLIENTE*/
 Route::resource('clientes', ClienteController::class);

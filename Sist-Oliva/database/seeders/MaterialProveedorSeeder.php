@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
-class ProveedorSeeder extends Seeder
+use App\Models\MaterialProveedor;
+class MaterialProveedorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class ProveedorSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Proveedor::factory(5)->create();
+        MaterialProveedor::factory(20)->create();
     }
 }

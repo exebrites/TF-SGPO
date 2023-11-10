@@ -369,6 +369,11 @@ return [
         'text' => 'Gestionar materiales', 
         'route' => 'materiales.index',
        ],
+       [
+        //'route'=> 'ruta'
+        'text' => 'historial materiales', 
+        'route' => 'historialMateriales',
+       ],
       
       
     ],

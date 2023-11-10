@@ -14,6 +14,6 @@ class MaterialSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Material::factory(5)->create();
+        \App\Models\Material::factory(10)->create();
     }
 }

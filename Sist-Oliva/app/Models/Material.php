@@ -19,5 +19,10 @@ class Material extends Model
     // fecha_adquisicion date
     // fecha_vencimiento date
     // notas string
+    public function materialProveedor()
+    {
+        //nota: los has van en los modelos que proveen FK
+        return $this->hasMany('App\Models\MaterialProveedor', 'material_id', 'id');
+    }
     use HasFactory;
 }
