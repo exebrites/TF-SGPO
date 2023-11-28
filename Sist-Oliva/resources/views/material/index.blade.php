@@ -21,13 +21,13 @@
                         {{-- <th>ID</th> --}}
                         <th>codigo interno</th>
 
-                        <th>Nombre</th>
+                        <th>Nombre de Material</th>
                         <th>descripcion</th>
                         <th>cantidad en stock</th>
-                        <th>unidad de medida</th>
+                        {{-- <th>unidad de medida</th> --}}
                         <th>fecha de adquisicion</th>
 
-                        <th>fecha de vencimiento</th>
+                        {{-- <th>fecha de vencimiento</th> --}}
                         <th>notas</th>
                         {{-- <th>Precio actualizado</th>
 
@@ -55,9 +55,9 @@
                             </td> --}}
                             <td><p>{{ $item->descripcion }}</p></td>
                             <td>{{ $item->stock }}</td>
-                            <td>{{ $item->unidad_medida }}</td>
+                            {{-- <td>{{ $item->unidad_medida }}</td> --}}
                             <td>{{ $item->fecha_adquisicion }}</td>
-                            <td>{{ $item->fecha_vencimiento }}</td>
+                            {{-- <td>{{ $item->fecha_vencimiento }}</td> --}}
                             <td>{{ $item->notas }}</td>
                             {{-- @foreach ($item->materialProveedor as $mp) --}}
                                 {{-- mp : material proveedor                                 --}}

@@ -70,7 +70,9 @@
                                 <div class="col">
                                     <div class="card">
                                         <div class="card-body">
-                                            <small>El estado de {{ $estado }} significa que el pago fue confirmado y que ahora necesitas completar los siguientes campos para que sepamos donde entregar el pedido </small><br>
+                                            <small>El estado de {{ $estado }} significa que el pago fue confirmado y que ahora
+                                                necesitas completar los siguientes campos para que sepamos donde entregar el pedido
+                                            </small><br>
                                             <br>
                                             <h5>Datos de entrega</h5>
 
@@ -147,10 +149,14 @@
                             </div> --}}
                             @break
 
+                            @case('disenio')
+                               {{redirect->route('home')}}
+                            @break
+
                             @default
-                            <small>El estado de {{ $estado }} significa que tu pedido esta se comenzó a trabajar y pronto tendras noticias de nosotros para seguir con las siguientes etapas </small><br>
-                            <br>
-                                
+                                <small>El estado de {{ $estado }} significa que tu pedido esta se comenzó a trabajar y pronto
+                                    tendras noticias de nosotros para seguir con las siguientes etapas </small><br>
+                                <br>
                         @endswitch
 
 

@@ -14,7 +14,7 @@ class CartController extends Controller
 {
     public function shop()
     {
-        $products = Producto::all();
+        $products = Producto::paginate(10);
         //dd($products);
         return view('shop')->with(['products' => $products]);
     }

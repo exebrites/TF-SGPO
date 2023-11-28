@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\PedidoController;
 
 class DisenioController extends Controller
 {
@@ -104,7 +105,10 @@ class DisenioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // detallePedido_id,url_imagen ,url_disenio ,diseno_estado 
+        $disenio = Disenio::find($id);
+        $pedido = $disenio->detallePedido->pedidos;
+        $pedido->update(['estado' => 'disenio']);
+       
 
         /**
        mueve la imagen a public storage
@@ -114,7 +118,7 @@ class DisenioController extends Controller
          */
 
         $imagen =  $request->file('file')->store('public');
-        // // $url = Storage::url($imagen);
+        // // // $url = Storage::url($imagen);
         if ($imagen != null) {
 
             $url_imagen = null;
@@ -129,7 +133,7 @@ class DisenioController extends Controller
         }
 
 
-        Mail::to('exe@gmail.com')->send(new EstadoMailable);
+        // // Mail::to('exe@gmail.com')->send(new EstadoMailable);
 
         return redirect()->route('disenios.index');
     }

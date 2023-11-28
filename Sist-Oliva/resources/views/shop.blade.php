@@ -1,15 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+    {{-- {{dd($products)}} --}}
     <div class="container" style="margin-top: 80px">
-        @if(session()->has('success_msg'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session()->get('success_msg') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-    @endif
+        @if (session()->has('success_msg'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session()->get('success_msg') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        @endif
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Inicio</a></li>
@@ -25,19 +26,18 @@
                 </div>
                 <hr>
                 <div class="row">
-                    @foreach($products as $pro)
+                    @foreach ($products as $pro)
                         <div class="col-lg-3">
                             <div class="card" style="margin-bottom: 20px; height: auto;">
 
                                 {{-- <img src="/storage/{{ $pro->image_path }}" --}}
-                                <img src="{{ $pro->image_path }}"
-                                     class="card-img-top mx-auto"
-                                     style="height: 150px; width: 150px;display: block;"
-                                     alt="{{ $pro->image_path }}"
-                                >
+                                <img src="{{ $pro->image_path }}" class="card-img-top mx-auto"
+                                    style="height: 150px; width: 150px;display: block;" alt="{{ $pro->image_path }}">
                                 <div class="card-body">
                                     {{-- acceder a los detalles del producto atraves del nombre --}}
-                                    <a href="{{route('producto.detalle',['id'=>$pro->id])}}"><h6 class="card-title">{{ $pro->name }}</h6></a>
+                                    <a href="{{ route('producto.detalle', ['id' => $pro->id]) }}">
+                                        <h6 class="card-title">{{ $pro->name }}</h6>
+                                    </a>
                                     {{-- <a href="">{{ $pro->name }}</a> --}}
                                     <p>${{ $pro->price }}</p>
                                     <form action="{{ route('cart.store') }}" method="POST">
@@ -60,8 +60,33 @@
                             </div>
                         </div>
                     @endforeach
+
                 </div>
+
             </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item{{ $products->currentPage() == 1 ? ' disabled' : '' }}">
+                        <a class="page-link" href="{{ $products->previousPageUrl() }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo; Previous</span>
+                        </a>
+                    </li>
+
+                    @for ($i = 1; $i <= $products->lastPage(); $i++)
+                        <li class="page-item{{ $i == $products->currentPage() ? ' active' : '' }}">
+                            <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
+                        </li>
+                    @endfor
+
+                    <li class="page-item{{ $products->currentPage() == $products->lastPage() ? ' disabled' : '' }}">
+                        <a class="page-link" href="{{ $products->nextPageUrl() }}" aria-label="Next">
+                            <span aria-hidden="true">Next &raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 @endsection

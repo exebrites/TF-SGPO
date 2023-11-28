@@ -372,7 +372,7 @@ return [
        [
         //'route'=> 'ruta'
         'text' => 'historial materiales', 
-        'route' => 'historialMateriales',
+        'route' => 'historialMateriales.index',
        ],
       
       

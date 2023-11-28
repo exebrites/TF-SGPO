@@ -12,6 +12,7 @@ use App\Http\Controllers\EntregaController;
 use App\Http\Controllers\fileController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\MaterialProveedorController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
@@ -46,8 +47,8 @@ Route::get('/prueba', [PruebaController::class, 'index'])->name('prueba.index');
 Route::get('/prueba/descargar{id}', [PruebaController::class, 'descargar'])->name('prueba.d');
 
 Route::get('home', function () {
-    return view('home');
-});
+    return 'hola';
+})->name('home');
 /*FIN RUTAS DE PRUEBAS*/
 
 
@@ -57,10 +58,10 @@ Route::get('home', function () {
 
 //RUTAS MATERIAL
 Route::resource('/materiales', MaterialController::class);
-Route::get('/historialMateriales', function () {
-    $mp = MaterialProveedor::all();
-    return view('historialmateriales', compact('mp'));
-})->name('historialMateriales');
+
+
+Route::resource('/historialMateriales', MaterialProveedorController::class);
+
 
 //RUTAS PROVEEDOR
 Route::resource('/proveedores', ProveedorController::class);
