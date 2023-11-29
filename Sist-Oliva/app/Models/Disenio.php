@@ -11,7 +11,7 @@ class Disenio extends Model
 {
     protected $table = 'disenios';
 
-    protected $fillable = ['detallePedido_id','url_imagen','url_disenio', 'disenio_estado'];
+    protected $fillable = ['detallePedido_id','url_imagen','url_disenio', 'disenio_estado','revision'];
     // id integer [pk]
     // detallePedido_id integer
     // url_imagen string

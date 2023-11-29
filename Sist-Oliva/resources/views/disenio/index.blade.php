@@ -20,6 +20,7 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
     <div class="accordion" id="accordionExample">
 
         @foreach ($pedidos as $item)
+       
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -38,6 +39,8 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
                                     <th>Producto</th>
                                     {{-- <th>Nro de diseño</th> --}}
                                     <th>Estado diseño</th>
+                                    <th>Revision</th>
+
                                     <th>imagen de diseño</th>
                                     {{-- <th>diseño</th> --}}
 
@@ -57,6 +60,8 @@ Diseño, Su estado y El pedido al que esta asociado  y el producto --}}
                                         {{-- $p->detallePedido[0]->disenio->disenio_estado --}}
                                         <td>{{ $detalle->producto->name }}</td>
                                         <td>{{ $detalle->disenio->disenio_estado ? 'Tiene' : 'no tiene' }}</td>
+                                        <td>{{ $detalle->disenio->revision ? 'SI' : 'NO' }}</td>
+
                                         <td><a data-toggle="modal" data-target="#exampleModal{{ $detalle->disenio->id }}">
                                                 Imagen de diseño
 

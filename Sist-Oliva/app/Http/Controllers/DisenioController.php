@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\PedidoController;
+use App\Models\DetallePedido;
 
 class DisenioController extends Controller
 {
@@ -108,7 +109,7 @@ class DisenioController extends Controller
         $disenio = Disenio::find($id);
         $pedido = $disenio->detallePedido->pedidos;
         $pedido->update(['estado' => 'disenio']);
-       
+
 
         /**
        mueve la imagen a public storage
@@ -174,7 +175,34 @@ class DisenioController extends Controller
         return response()->download($url_full);
     }
 
+    public function show_disenio($id)
+    {
+        $detalle=DetallePedido::find($id);
+        $disenio = $detalle->disenio;
+        return view('disenio.indexCliente', compact('disenio'));
+    }
+    public function preguntas(Request $request)
+    {
+        //logica necesaria para almacenar las preguntas
+        $disenio=Disenio::find($request->disenio_id);
+        $pedido=$disenio->detallePedido->pedidos;
+        if ($request->pregunta4) {
+            //logica necesaria para realizar la aceptacion del diseño
+            //1 producto un pedido
+            $pedido->update(['estado'=>'produccion']);
+            //notificar al cliente
+            //notificar a gerencia
+            
+        } else {
 
+            //logica necesaria para tratar el rechazo del diseño
+        }
+
+
+    
+        return $request;
+
+    }
     /**
      Codigo comentado Revisar
      

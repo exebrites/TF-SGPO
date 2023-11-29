@@ -21,13 +21,14 @@
                     <div class="accordion" id="accordionExample">
 
                         @foreach ($pedidos as $item)
-
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingTwo">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseTwo{{ $item->id }}" aria-expanded="false"
                                         aria-controls="collapseTwo">
-                                        Nro de pedido: {{ $item->id }} <br> Estado: {{ $item->estado }} <br> Ultima actualizacion de pedido : {{ $item->updated_at->format('Y-m-d') }} 
+                                        Nro de pedido: {{ $item->id }} <br> Estado: {{ $item->estado }} <br> Ultima
+                                        actualizacion de pedido : {{ $item->updated_at->format('Y-m-d') }} <br> Te faltan x
+                                        diseños por revisar
                                     </button>
                                 </h2>
 
@@ -46,12 +47,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+
                                                 @foreach ($item->detallePedido as $detalle)
                                                     <tr>
                                                         {{-- <th scope="row">1</th> --}}
+                                                   
 
-                                                        <td>{{ $detalle->producto->name }}</td>
+                                                        <td>{{ $detalle->producto->name }} <a
+                                                                href="{{ route('show_disenio', $detalle->id) }}"> ver
+                                                                diseño</a></td>
                                                         <td>{{ $detalle->cantidad }} unidades</td>
+
                                                         {{-- <td>{{$detalle->estado_disenio}}</td> --}}
 
                                                     </tr>
@@ -59,7 +65,6 @@
 
 
                                             </tbody>
-
                                         </table>
                                     </div>
                                 </div>

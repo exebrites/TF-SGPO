@@ -85,6 +85,8 @@ Route::resource('/bocetos', BocetoController::class);
  */
 Route::resource('/disenios', DisenioController::class);
 Route::get('/descargar{id}', [DisenioController::class, 'descargar'])->name('disenios.descargar');
+route::get('/show_disenio{id}', [DisenioController::class, 'show_disenio'])->name('show_disenio');
+Route::post('/preguntas', [DisenioController::class, 'preguntas'])->name('preguntas');
 
 
 

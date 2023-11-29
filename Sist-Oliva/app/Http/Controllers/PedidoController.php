@@ -122,8 +122,9 @@ class PedidoController extends Controller
             Disenio::create([
                 'detallePedido_id' => $idDP,
                 'url_imagen' => $url_imagen,
-                'url_disenio' => null,
-                'disenio_estado' => 1
+                'url_disenio' => "",
+                'disenio_estado' => 1,
+                'revision'=>0
             ]);
         }
         $total = \Cart::getTotal();

@@ -150,7 +150,16 @@
                             @break
 
                             @case('disenio')
-                               {{redirect->route('home')}}
+                                {{-- {{    event(new App\Events\MiEvento())}} --}}
+                                {{-- {{ $disenio = (new App\Http\Controllers\DisenioController())->show_disenio($id)
+                                }}
+                                <img src="{{$disenio->url_disenio}}" alt="" srcset=""> --}}
+                                {{-- 
+                                Que trae $id trae el valor del id pedido {{$id}}
+                                traer por cada producto su diseño
+                                que pasa si no tiene el diseño 
+                                mostrar una vista dentro de otra vista --}}
+
                             @break
 
                             @default
