@@ -178,7 +178,7 @@ class ProductoController extends Controller
     {
 
         $pro = Producto::find($id);
-
-        return view('detalleProducto', ['pro' => $pro]);
+        $url_imagen = '';
+        return view('detalleProducto', compact('pro', 'url_imagen'));
     }
 }

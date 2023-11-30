@@ -181,28 +181,7 @@ class DisenioController extends Controller
         $disenio = $detalle->disenio;
         return view('disenio.indexCliente', compact('disenio'));
     }
-    public function preguntas(Request $request)
-    {
-        //logica necesaria para almacenar las preguntas
-        $disenio=Disenio::find($request->disenio_id);
-        $pedido=$disenio->detallePedido->pedidos;
-        if ($request->pregunta4) {
-            //logica necesaria para realizar la aceptacion del diseño
-            //1 producto un pedido
-            $pedido->update(['estado'=>'produccion']);
-            //notificar al cliente
-            //notificar a gerencia
-            
-        } else {
 
-            //logica necesaria para tratar el rechazo del diseño
-        }
-
-
-    
-        return $request;
-
-    }
     /**
      Codigo comentado Revisar
      

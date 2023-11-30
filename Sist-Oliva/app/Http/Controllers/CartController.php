@@ -9,6 +9,8 @@ use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+
 
 class CartController extends Controller
 {
@@ -31,13 +33,50 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success_msg', 'Producto removido!');
     }
 
+    public function subirImagen(Request $request) //NUEVO
+    {
+
+
+        // Aplica reglas de validación
+        $validator = Validator::make($request->all(), [
+            'imagen' => 'required|image|mimes:jpeg,png,jpg|dimensions:max=2048', // Ajusta las extensiones y el tamaño máximo según tus necesidades
+        ]);
+
+        // Verifica si las reglas de validación han sido cumplidas
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Sube el archivo recibido en la solicitud con el nombre 'file' al directorio 'public' del sistema de archivos de Laravel.
+        $imagen = $request->file('imagen')->store('public');
+
+        // Obtiene la URL pública del archivo recién almacenado utilizando el servicio Storage de Laravel.
+        $url_imagen = Storage::url($imagen);
+        return redirect()->back()->with('success', 'Imagen subida exitosamente.')->with('url_imagen', $url_imagen);
+    }
     public function add(Request $request)
     {
-        
-        $imagen =  $request->file('file')->store('public');
-        $url_disenio = Storage::url($imagen);
 
+        // Aplica reglas de validación
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|image|mimes:jpeg,png,jpg|dimensions:max=2048', // Ajusta las extensiones y el tamaño máximo según tus necesidades
+        ]);
 
+        // Verifica si las reglas de validación han sido cumplidas
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Sube el archivo recibido en la solicitud con el nombre 'file' al directorio 'public' del sistema de archivos de Laravel.
+        $imagen = $request->file('file')->store('public');
+
+        // Obtiene la URL pública del archivo recién almacenado utilizando el servicio Storage de Laravel.
+        $url_imagen = Storage::url($imagen);
+        //agrega el producto y su diseño al carrito
         \Cart::add(array(
             'id' => $request->id,
             'name' => $request->name,
@@ -46,12 +85,13 @@ class CartController extends Controller
             'attributes' => array(
                 'imagen_path' => $request->img,
                 'slug' => $request->slug,
-                'url_disenio' => $url_disenio,
-                'estado_disenio'=> true
+                'url_disenio' => $url_imagen,
+                'estado_disenio' => true
             )
         ));
 
         return redirect()->route('cart.index')->with('success_msg', 'Producto agregado a su Carrito!');
+
         // return     $url_disenio;
     }
 

@@ -29,7 +29,7 @@
                         @switch($estado)
                             @case('pendiente-pago')
                                 {{-- {{dd($estado)}} --}}
-
+                                
                                 <div class="col">
                                     <div class="card">
                                         <div class="card-body">
@@ -100,7 +100,7 @@
 
                                                     <div class="form-group">
                                                         <label>Nota</label>
-                                                        <textarea class="form-control" aria-label="With textarea" name="nota"></textarea>
+                                                        <textarea class="form-control" aria-label="With textarea" name="nota">Sin comentarios</textarea>
                                                     </div>
 
                                                 </div>

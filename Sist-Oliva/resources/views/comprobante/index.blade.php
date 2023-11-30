@@ -1,4 +1,8 @@
 @extends('adminlte::page')
+<!-- Agrega estos enlaces en el head de tu HTML -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
 @section('title')
 
@@ -26,10 +30,11 @@
                 </thead>
 
                 <tbody>
+
                     @foreach ($comprobantes as $item)
                         <tr>
                             {{-- x --}}
-                            <td>{{ $item->created_at->format('Y-m-d')}}</td>
+                            <td>{{ $item->created_at->format('Y-m-d') }}</td>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->pedido->id }}</td>
                             <td>{{ $item->pedido->estado }}</td>
@@ -69,11 +74,14 @@
 
 
 
+                                     Muestra una imagen con
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <img src="{{ $item->url_comprobantes }}" alt="Imagen 1" class="img-fluid">
+                                            <div class="col">
+                                                <a href="{{ $item->url_comprobantes }}" class="image-popup" title="Zoom">
+                                                    <img src="{{ $item->url_comprobantes }}" alt="Imagen 1"
+                                                        class="img-fluid">
+                                                </a>
                                             </div>
-
                                         </div>
 
 
@@ -95,6 +103,18 @@
             </table>
         </div>
     </div>
-
+    <script>
+        // Agrega el siguiente script al final de tu archivo HTML o en una sección de scripts
+        $(document).ready(function() {
+            $('.image-popup').magnificPopup({
+                type: 'image',
+                closeOnContentClick: true,
+                mainClass: 'mfp-img-mobile',
+                image: {
+                    verticalFit: true
+                }
+            });
+        });
+    </script>
 
 @stop

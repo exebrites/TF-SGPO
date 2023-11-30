@@ -111,7 +111,8 @@ class PedidoController extends Controller
                 'pedido_id' => $id,
                 'producto_id' => $idPr,
                 'cantidad' => $p->quantity,
-                'subtotal' => \Cart::get($idPr)->getPriceSum()
+                'subtotal' => \Cart::get($idPr)->getPriceSum(),
+                'produccion' => false
             ]);
             $idDP = detallePedido::max('id');
             // dd($p->attributes->url_disenio);
@@ -124,7 +125,7 @@ class PedidoController extends Controller
                 'url_imagen' => $url_imagen,
                 'url_disenio' => "",
                 'disenio_estado' => 1,
-                'revision'=>0
+                'revision' => 0
             ]);
         }
         $total = \Cart::getTotal();

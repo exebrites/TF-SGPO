@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DetallePedido extends Model
 {
     protected $table = "detalle_pedidos";
-    protected $fillable = ['pedido_id', 'producto_id', 'cantidad', 'subtotal'];
+    protected $fillable = ['pedido_id', 'producto_id', 'cantidad', 'subtotal','produccion'];
     // id integer pk
     // pedido_id integer
     // producto_id integer

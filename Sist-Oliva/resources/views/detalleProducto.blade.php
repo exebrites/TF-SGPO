@@ -17,12 +17,30 @@
     <br>
     <br>
     <div class="row">
-        {{-- {{dd($pro);}} --}}
+        {{-- {{dd($pro)}} --}}
         <div class="col-2"></div>
         <div class="col-8">
             <div class="card" style="margin-bottom: 20px; height: auto;">
+                {{-- mensajes  --}}
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                {{-- <input type="text" name="" id="" value="{{ $url_imagen }}"> --}}
+
                 <img src="{{ $pro->image_path }}" class="card-img-top mx-auto"
-                    style="height: 150px; width: 150px;display: block;" alt="{{ $pro->image_path }}">
+                    style="height: 300px; width: 300px;display: block;" alt="{{ $pro->image_path }}">
                 <div class="card-body">
                     {{-- acceder a los detalles del producto atraves del nombre --}}
                     <a href="{{ route('producto.detalle', ['id' => $pro->id]) }}">
@@ -30,6 +48,31 @@
                     </a>
                     {{-- <a href="">{{ $pro->name }}</a> --}}
                     <p>${{ $pro->price }}</p>
+
+
+
+                    {{-- Formulario de subir imagen --}}
+                    {{-- <form action="{{ route('subirImagen') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <!-- CSRF token para protección contra ataques CSRF -->
+
+                        <div id="subir">
+                            <label><b> Subir imagen del diseño</b></label><br>
+                            <small>Aqui podes subir la imagen de tu diseño que luego se usará para crear el diseño del
+                                producto solicitado</small>
+                            <br><br>
+
+                            <!-- Agrega el atributo accept con el valor 'image/*' para aceptar solo archivos de imagen -->
+                            <input type="file" name="imagen" id="" accept="image/*"><br>
+                            <!-- Input para seleccionar el archivo -->
+
+                            <br>
+                            <input class="btn btn-success" type="submit" value="Subir imagen">
+                            <!-- Botón para enviar el formulario -->
+                        </div>
+                    </form> --}}
+
+
                     <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <input type="hidden" value="{{ $pro->id }}" id="id" name="id">
@@ -38,23 +81,25 @@
                         <input type="hidden" value="{{ $pro->image_path }}" id="img" name="img">
                         <input type="hidden" value="{{ $pro->slug }}" id="slug" name="slug">
                         <input type="hidden" value="1" id="quantity" name="quantity">
-                        <div id="subir">
-                            <label><b> Subir imagen del diseño</b></label><br>
-                            <small>Aqui podes subir la imagen de tu diseño que luego se usará para crear el diseño del
-                                producto
-                                solicitado</small>
-
-
-                            <br><br>
-                            <input type="file" name="file" id="">
-                        </div>
+                        <label><b> Subir imagen del diseño</b></label><br>
+                        <small>Aqui podes subir la imagen de tu diseño que luego se usará para crear el diseño del
+                            producto solicitado</small>
+                        <br><br>
+                        <input type="file" name="file" id="" accept="image/*"><br>
                         <br>
-                        <input type="checkbox" name="miCheckbox" id="miCheckbox">No tengo diseño <br> </input>
+                        {{-- <input type="checkbox" name="miCheckbox" id="miCheckbox">No tengo diseño <br> --}}
+                       
+
+                        <!-- Agrega el atributo accept con el valor 'image/*' para aceptar solo archivos de imagen -->
+                        <!-- Input para seleccionar el archivo -->
 
 
-                        <h3 id="h3" style="display: none">No tienes un diseño propio? Hace click aquí <br> <small>Cuando
-                            crea un boceto, se crea un diseño para su producto </small><br> <a href="{{ Route('bocetos.create') }}"
-                                class="btn btn-primary">Hacer un Boceto</a></h3>
+
+                        {{-- <h3 id="h3" style="display: none">No tienes un diseño propio? Hace click aquí <br>
+                            <small>Cuando
+                                crea un boceto, se crea un diseño para su producto </small><br> <a
+                                href="{{ Route('bocetos.create') }}" class="btn btn-primary">Hacer un Boceto</a>
+                        </h3> --}}
                         <div class="form-group">
 
 
@@ -67,19 +112,22 @@
                                 </div>
                             </div>
                     </form>
+
                 </div>
 
-
-
             </div>
-        </div>
-        <div class="col-2">
+
+
 
         </div>
-        <div> <a class="btn btn-danger" href="{{ url()->previous() }}">Cancelar</a></div>
+    </div>
+    <div class="col-2">
+
+    </div>
+    <div> <a class="btn btn-danger" href="{{ url()->previous() }}">Cancelar</a></div>
 
 
-        {{-- <div class="col">
+    {{-- <div class="col">
             <div class="card" style="margin-bottom: 20px; height: auto;">
                 <div class="card-body" id="body-dropzone">
                     <h3>En caso de tener un diseño propio subirlo aqui</h3>
@@ -105,55 +153,55 @@
     </div> --}}
 
 
-        {{-- Archivos js  --}}
-        <script>
-            // Obtén una referencia al checkbox
-            const checkbox = document.getElementById('miCheckbox');
-            const h3 = document.getElementById('h3');
-            const dropzone = document.getElementById('body-dropzone');
-            const subir = document.getElementById('subir');
-            checkbox.checked = false;
+    {{-- Archivos js  --}}
+    <script>
+        // Obtén una referencia al checkbox
+        const checkbox = document.getElementById('miCheckbox');
+        const h3 = document.getElementById('h3');
+        const dropzone = document.getElementById('body-dropzone');
+        const subir = document.getElementById('subir');
+        checkbox.checked = false;
 
-            // Agrega un evento de escucha al checkbox
-            checkbox.addEventListener('click', function() {
-                // Verifica si el checkbox está marcado
-                if (checkbox.checked) {
-                    h3.style.display = "block"
-                    subir.style.display = "none"
-                    // Redirige a la página deseada
-                    // window.location.href =
-                    //     '/boceto'; // Reemplaza 'https://www.ejemplo.com' con la URL a la que deseas redirigir.
-                } else {
-                    h3.style.display = "none"
-                    subir.style.display = "block"
-                }
-            });
-        </script>
+        // Agrega un evento de escucha al checkbox
+        checkbox.addEventListener('click', function() {
+            // Verifica si el checkbox está marcado
+            if (checkbox.checked) {
+                h3.style.display = "block"
+                subir.style.display = "none"
+                // Redirige a la página deseada
+                // window.location.href =
+                //     '/boceto'; // Reemplaza 'https://www.ejemplo.com' con la URL a la que deseas redirigir.
+            } else {
+                h3.style.display = "none"
+                subir.style.display = "block"
+            }
+        });
+    </script>
 
-        <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 
-        <script>
-            // Note that the name "myDropzone" is the camelized
-            // id of the form.
-            Dropzone.options.myAwesomeDropzone = {
-                // Configuration options go here
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}",
-                    'disenio_estado': "checkbox.checked"
-                },
-                dictDefacultMessage: "Arrastre una imagen al recuadro para subirlo",
-                acceptedFiles: "image/*",
-                maxFilesize: 4, //en MB's
-                maxFiles: 1,
-                autoProcessQueue: false,
-                // paramName:'' //cambiar el name
-            };
-            var myDropzone = new Dropzone("#my-awesome-dropzone");
+    <script>
+        // Note that the name "myDropzone" is the camelized
+        // id of the form.
+        Dropzone.options.myAwesomeDropzone = {
+            // Configuration options go here
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                'disenio_estado': "checkbox.checked"
+            },
+            dictDefacultMessage: "Arrastre una imagen al recuadro para subirlo",
+            acceptedFiles: "image/*",
+            maxFilesize: 4, //en MB's
+            maxFiles: 1,
+            autoProcessQueue: false,
+            // paramName:'' //cambiar el name
+        };
+        var myDropzone = new Dropzone("#my-awesome-dropzone");
 
-            // Maneja el evento de inicio de carga (puede estar vinculado a un botón)
-            document.getElementById("start-upload-button").addEventListener("click", function() {
-                myDropzone.processQueue(); // Inicia el proceso de carga cuando se hace clic en el botón
-            });
-        </script>
-        <script src="/js/app.js"></script>
-    @endsection
+        // Maneja el evento de inicio de carga (puede estar vinculado a un botón)
+        document.getElementById("start-upload-button").addEventListener("click", function() {
+            myDropzone.processQueue(); // Inicia el proceso de carga cuando se hace clic en el botón
+        });
+    </script>
+    <script src="/js/app.js"></script>
+@endsection

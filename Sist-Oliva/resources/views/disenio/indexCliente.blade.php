@@ -11,7 +11,8 @@
                 {{--  --}}
                 {{-- {{dd($disenio->detallePedido->pedidos->estado)}} --}}
                 <div class="row">
-                    @if ($disenio->detallePedido->pedidos->estado === 'disenio' && $disenio->url_disenio != "" )
+                    {{-- && !$disenio->detallePedido --}}
+                    @if ($disenio->detallePedido->pedidos->estado === 'disenio' && $disenio->url_disenio != "")
                         <div class="col-6">
                             <h1>Revision de diseño</h1>
 
@@ -34,7 +35,7 @@
                         <div class="col-6">
                             <div class="container mt-5">
                                 <h2>Encuesta de Diseño</h2>
-                                <form action="{{ route('preguntas') }}" method="post">
+                                <form action="{{ route('respuestas.store') }}" method="post">
                                     @csrf
 
                                     <div class="form-group" style="">
@@ -46,7 +47,7 @@
 
                                     <div class="mb-3">
                                         <label for="pregunta1" class="form-label">1) ¿Te gusta el diseño?</label>
-                                        <select class="form-select" id="pregunta1" name="pregunta1">
+                                        <select class="form-select" id="pregunta1" name="1">
                                             <option value="si">Sí</option>
                                             <option value="no">No</option>
                                         </select>
@@ -54,7 +55,7 @@
 
                                     <div class="mb-3">
                                         <label for="pregunta2" class="form-label">2) ¿Son los colores solicitados?</label>
-                                        <select class="form-select" id="pregunta2" name="pregunta2">
+                                        <select class="form-select" id="pregunta2" name="2">
                                             <option value="si">Sí</option>
                                             <option value="no">No</option>
                                         </select>
@@ -63,7 +64,7 @@
                                     <div class="mb-3">
                                         <label for="pregunta3" class="form-label">3) ¿Lo escrito en el diseño es lo
                                             solicitado?</label>
-                                        <select class="form-select" id="pregunta3" name="pregunta3">
+                                        <select class="form-select" id="pregunta3" name="3">
                                             <option value="si">Sí</option>
                                             <option value="no">No</option>
                                         </select>
@@ -72,25 +73,25 @@
                                         <label for="calificacion" class="form-label">Calificación del diseño (1-3) <br>
                                             Siendo 1) Excelente 2)
                                             Bueno 3) Malo:</label>
-                                        <input type="number" class="form-control" id="calificacion" name="calificacion"
+                                        <input type="number" class="form-control" id="calificacion" name="4"
                                             min="1" max="3" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="comentarios" class="form-label">Comentarios adicionales:</label>
-                                        <textarea class="form-control" id="comentarios" name="comentarios" rows="4"></textarea>
+                                        <textarea class="form-control" id="comentarios" value="Sin comentarios" name="5" rows="4">Sin comentarios</textarea>
                                     </div>
                                     <small><b>Aclaracion:</b><br>Al momento de responder con un SI la siguiente pregunta,
                                         nos da la confirmacion para pasar a produccion. En caso contrario (respuesta: NO) el
                                         diseño volverá a revisar y se le notificará para su revision </small>
                                     <div class="mb-3">
                                         <label for="pregunta3" class="form-label">¿Esta conforme con el diseño?</label>
-                                        <select class="form-select" id="pregunta3" name="pregunta4">
+                                        <select class="form-select" id="pregunta3" name="6">
                                             <option value="1">Sí</option>
                                             <option value="0">No</option>
                                         </select>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Enviar Encuesta</button>
+                                    <button type="submit" class="btn btn-primary">Enviar respuesta</button>
                                 </form>
                             </div>
                         </div>

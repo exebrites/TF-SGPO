@@ -27,23 +27,30 @@
                                         data-bs-target="#collapseTwo{{ $item->id }}" aria-expanded="false"
                                         aria-controls="collapseTwo">
                                         Nro de pedido: {{ $item->id }} <br> Estado: {{ $item->estado }} <br> Ultima
-                                        actualizacion de pedido : {{ $item->updated_at->format('Y-m-d') }} <br> Te faltan x
-                                        diseños por revisar
+                                        actualizacion de pedido : {{ $item->updated_at->format('Y-m-d') }}
+                                        {{-- <br> Te faltan x
+                                        diseños por revisar --}}
                                     </button>
                                 </h2>
 
                                 <div id="collapseTwo{{ $item->id }}" class="accordion-collapse collapse"
                                     aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <a href="{{ route('checkout.show', $item->id) }}">Paso a seguir para completar el
-                                            pedido </a>
+                                        @if ($item->estado == 'pendiente-pago' || $item->estado == 'confirmado-pago')
+                                            <td>
+                                                <a href="{{ route('checkout.show', $item->id) }}">Paso a seguir para
+                                                    completar el
+                                                    pedido </a>
+                                            </td>
+                                        @endif
+
                                         <table class="table">
                                             <thead>
                                                 <tr>
                                                     {{-- <th scope="col">#</th> --}}
                                                     <th scope="col">Producto</th>
                                                     <th scope="col">Cantidad</th>
-                                                    {{-- <th scope="col">Estado de diseño</th> --}}
+                                                    <th scope="col">Estado de diseño</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -51,14 +58,20 @@
                                                 @foreach ($item->detallePedido as $detalle)
                                                     <tr>
                                                         {{-- <th scope="row">1</th> --}}
-                                                   
 
-                                                        <td>{{ $detalle->producto->name }} <a
-                                                                href="{{ route('show_disenio', $detalle->id) }}"> ver
-                                                                diseño</a></td>
+
+                                                        <td>{{ $detalle->producto->name }} </td>
                                                         <td>{{ $detalle->cantidad }} unidades</td>
 
-                                                        {{-- <td>{{$detalle->estado_disenio}}</td> --}}
+                                                        <td>{{ $detalle->produccion ? 'En produccion' : 'Pre-produccion' }}
+                                                        </td>
+                                                        @if (!$detalle->produccion)
+                                                            <td>
+                                                                <a id="disenio"
+                                                                    href="{{ route('show_disenio', $detalle->id) }}"> ver
+                                                                    diseño</a>
+                                                            </td>
+                                                        @endif
 
                                                     </tr>
                                                 @endforeach
@@ -81,6 +94,7 @@
 
         </div>
     </div>
+    <script></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>

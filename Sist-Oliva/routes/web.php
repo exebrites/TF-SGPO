@@ -1,31 +1,33 @@
 <?php
 
-use App\Http\Controllers\BocetoController;
-use App\Http\Controllers\ProfileController;
+use App\Mail\prueba;
+use App\Models\Pedido;
+use App\Models\Producto;
+use App\Models\Proveedor;
+use App\Mail\PagoMailable;
+use GuzzleHttp\Psr7\Request;
+use App\Models\MaterialProveedor;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\RouteRegistrar;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutContorller;
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\ComprobanteController;
-use App\Http\Controllers\DisenioController;
-use App\Http\Controllers\EntregaController;
 use App\Http\Controllers\fileController;
 use App\Http\Controllers\MailController;
-use App\Http\Controllers\MaterialController;
-use App\Http\Controllers\MaterialProveedorController;
+use App\Http\Controllers\BocetoController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PruebaController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\DisenioController;
+use App\Http\Controllers\EntregaController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CheckoutContorller;
+use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\PreguntaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
-use App\Http\Controllers\PruebaController;
-use App\Mail\PagoMailable;
-use App\Models\Producto;
-use Illuminate\Routing\RouteRegistrar;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\prueba;
-use App\Models\MaterialProveedor;
-use App\Models\Pedido;
-use App\Models\Proveedor;
-use GuzzleHttp\Psr7\Request;
+use App\Http\Controllers\RespuestaController;
+use App\Http\Controllers\ComprobanteController;
+use App\Http\Controllers\MaterialProveedorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +57,8 @@ Route::get('home', function () {
 
 
 
+Route::resource('/preguntas', PreguntaController::class);
+Route::resource('/respuestas', RespuestaController::class);
 
 //RUTAS MATERIAL
 Route::resource('/materiales', MaterialController::class);
@@ -86,7 +90,8 @@ Route::resource('/bocetos', BocetoController::class);
 Route::resource('/disenios', DisenioController::class);
 Route::get('/descargar{id}', [DisenioController::class, 'descargar'])->name('disenios.descargar');
 route::get('/show_disenio{id}', [DisenioController::class, 'show_disenio'])->name('show_disenio');
-Route::post('/preguntas', [DisenioController::class, 'preguntas'])->name('preguntas');
+// Route::post('/preguntas', [DisenioController::class, 'preguntas'])->name('preguntas');
+
 
 
 
@@ -153,7 +158,8 @@ Route::post('/add', [CartController::class, 'add'])->name('cart.store');
 Route::post('/update', [CartController::class, 'update'])->name('cart.update');
 Route::post('/remove', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
-//
+route::post('/subirImagen', [CartController::class, 'subirImagen'])->name('subirImagen');
+
 
 
 /*RUTAS DEL PANEL DE ADMINISTRACION*/
